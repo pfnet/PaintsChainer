@@ -4,6 +4,10 @@ Using CNN, you can colorize your scketch automatically / semi-automatically .
 
 ![image](https://github.com/taizan/PaintsChainer/blob/open/sample.png)
 
+## Requirement
+- Chainer
+- CUDA / cudnn
+
 ## How to boot UI
 UI is html based. using wPaint.js
 Server side is very basic python server
@@ -25,4 +29,6 @@ to train 2nd layer using GPU 0 `python train_x2.py -g 0`
 http://paintschainer.preferred.tech/
 
 ## Pre-Trained Models
+Download following model files to  cgi-bin/paint_x2_unet/models/
+
 http://paintschainer.preferred.tech/downloads/
