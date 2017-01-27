@@ -2,7 +2,7 @@ $(function() {
         image_id = "test_id"
 
         $('#wPaint').wPaint({
-            path: '/wPaint/',
+            path: '/static/wPaint/',
             menuOffsetLeft: -35,
             menuOffsetTop: -50,
         });
@@ -100,8 +100,8 @@ $(function() {
                         //location.reload();
                         console.log("uploaded")
                         var now = new Date().getTime();
-                        $('#output').attr('src', '/images/out/'+image_id+'_0.jpg?' + now);
-                        $('#output_min').attr('src', '/images/out_min/'+image_id+'_0.png?' + now);
+                        $('#output').attr('src', '/static/images/out/'+image_id+'_0.jpg?' + now);
+                        $('#output_min').attr('src', '/static/images/out_min/'+image_id+'_0.png?' + now);
                         endPaint()
                 }
               });
