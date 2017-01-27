@@ -1,10 +1,12 @@
 # Paints Chainer
 Paints Chainer is line drawing colorizer using chainer.
+Using CNN, you can colorize your scketch automatically / semi-automatically .
 
+![image](https://github.com/taizan/PaintsChainer/blob/open/sample.png)
 
-
-## Usage of UI
+## How to boot UI
 UI is html based. using wPaint.js
+Server side is very basic python server
 
 boot local server
 `python server.py`
