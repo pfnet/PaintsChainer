@@ -1,0 +1,42 @@
+.wColorPicker{position:relative;display:inline-block;*display:inline;zoom:1;line-height:0;font-size:0;cursor:default}
+.wColorPicker-bg{position:absolute;left:0;top:0;width:100%;height:100%}
+.wColorPicker-holder{position:relative;display:inline-block;*display:inline;zoom:1;overflow:hidden}
+.wColorPicker-palettes-holder{position:relative;display:inline-block;*display:inline;zoom:1}
+.wColorPicker-zindex{z-index:1000}
+.wColorPicker-palette{position:relative;display:inline-block;*display:inline;zoom:1;margin:0 10px 10px 0}
+.wColorPicker-palette-none,.wColorPicker-palette-simple{margin-left:10px}
+.wColorPicker-palette-color{display:inline-block;*display:inline;zoom:1;vertical-align:middle;width:10px;height:10px;border-right:solid 1px;border-bottom:solid 1px;cursor:pointer}
+.wColorPicker-palette-color-left{border-left:solid 1px}
+.wColorPicker-palette-color-top{border-top:solid 1px}
+.wColorPicker-color-target{position:relative;display:inline-block;*display:inline;zoom:1;vertical-align:middle;width:40px;height:16px;border:solid 1px}
+.wColorPicker-custom-input{position:relative;display:inline-block;*display:inline;zoom:1;vertical-align:middle;width:70px;height:16px;line-height:16px;font-size:9px;font-family:verdana;padding:0 2px;border:solid 1px}
+.wColorPicker-color-target,.wColorPicker-custom-input{margin:10px 10px 10px 0}
+.wColorPicker-dropper{position:relative;display:inline-block;*display:inline;zoom:1;vertical-align:middle;width:16px;height:16px;border:solid 1px;cursor:pointer}
+.wColorPicker-button{position:relative;-webkit-border-radius:5px;border-radius:5px;border:solid #cacaca 1px;padding:1px}
+.wColorPicker-button-color{position:relative;-webkit-border-radius:5px;border-radius:5px}
+.wColorPicker-holder{border:solid 1px}
+.wColorPicker-bg,.wColorPicker-holder{-webkit-border-radius:5px;border-radius:5px}
+.wColorPicker-bg{-webkit-box-shadow:inset 2px 2px 3px #fff,1px 1px 2px #555;box-shadow:inset 2px 2px 3px #fff,1px 1px 2px #555}
+.wColorPicker-custom-input{opacity:.5;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";filter:alpha(opacity=50)}
+.wColorPicker-dropper{opacity:.6;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";filter:alpha(opacity=60);-webkit-border-radius:4px;border-radius:4px;-webkit-box-shadow:inset 1px 1px 2px #fff,0 0 1px #777;box-shadow:inset 1px 1px 2px #fff,0 0 1px #777;background-color:#cacaca;background:no-repeat center center url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwOC8wOS8xM9AohnYAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAAA4ElEQVQokYXSMUpDARCE4e/FBCEggoVH0BtY2bsiiIWIipVHsLaOYCcWVtpYSBBEsNnO9qGFR/AKVhISNRa+SJDkudWw/DMwyxbD4dB/ExEnWMFBUWeIiAVs4RxtPDdr4DUcY7Va9fA01YAzLFd6gKPMvGhMSd/EKR6r1QsuofkHLLCDr8y8iohPLKKTmX34LR0RLeyij3uso4GHzByMQhtj8B56mdmt4HZm3o3DMFOWZYGogJuI2MZ8Zl5P6tfEHFroRsQ+ZjERHhkOK72Bd9xm5ked4RVLfk74lpm1v/INodZOOpic3qMAAAAASUVORK5CYII=")}
+.wColorPicker-theme-classic .wColorPicker-dropper,.wColorPicker-theme-classic .wColorPicker-custom-input,.wColorPicker-theme-classic .wColorPicker-color-target,.wColorPicker-theme-classic .wColorPicker-palette-color{border-color:#3a3a3a}
+.wColorPicker-theme-classic .wColorPicker-holder{border-color:#bababa}
+.wColorPicker-theme-classic .wColorPicker-bg{background-color:#aaa}
+.wColorPicker-theme-black .wColorPicker-dropper,.wColorPicker-theme-black .wColorPicker-color-target,.wColorPicker-theme-black .wColorPicker-color-input,.wColorPicker-theme-black .wColorPicker-palette-color{border-color:#3f3f3f}
+.wColorPicker-theme-black .wColorPicker-holder{border-color:#7f7f7f}
+.wColorPicker-theme-black .wColorPicker-bg{background-color:#363636}
+.wColorPicker-theme-blue .wColorPicker-dropper,.wColorPicker-theme-blue .wColorPicker-color-target,.wColorPicker-theme-blue .wColorPicker-color-input,.wColorPicker-theme-blue .wColorPicker-palette-color{border-color:#002f4d}
+.wColorPicker-theme-blue .wColorPicker-holder{border-color:#49afcd}
+.wColorPicker-theme-blue .wColorPicker-bg{background-color:#2f96b4}
+.wColorPicker-theme-red .wColorPicker-dropper,.wColorPicker-theme-red .wColorPicker-color-target,.wColorPicker-theme-red .wColorPicker-color-input,.wColorPicker-theme-red .wColorPicker-palette-color{border-color:#8a0f09}
+.wColorPicker-theme-red .wColorPicker-holder{border-color:#da4f49}
+.wColorPicker-theme-red .wColorPicker-bg{background-color:#bd362f}
+.wColorPicker-theme-green .wColorPicker-dropper,.wColorPicker-theme-green .wColorPicker-color-target,.wColorPicker-theme-green .wColorPicker-color-input,.wColorPicker-theme-green .wColorPicker-palette-color{border-color:#0b670b}
+.wColorPicker-theme-green .wColorPicker-holder{border-color:#5bb75b}
+.wColorPicker-theme-green .wColorPicker-bg{background-color:#51a351}
+.wColorPicker-theme-orange .wColorPicker-dropper,.wColorPicker-theme-orange .wColorPicker-color-target,.wColorPicker-theme-orange .wColorPicker-color-input,.wColorPicker-theme-orange .wColorPicker-palette-color{border-color:#9a5700}
+.wColorPicker-theme-orange .wColorPicker-holder{border-color:#faa732}
+.wColorPicker-theme-orange .wColorPicker-bg{background-color:#f89406}
+.wColorPicker-palette-color.active{border-color:#f00}
+.wColorPicker-palette-color.active-right{border-right-color:#f00}
+.wColorPicker-palette-color.active-bottom{border-bottom-color:#f00}
