@@ -100,7 +100,7 @@ args = parser.parse_args()
 
 print('GPU: {}'.format(args.gpu))
 
-paintor = cgi_exe.Paintor( gpu = args.gpu )
+paintor = cgi_exe.Painter( gpu = args.gpu )
 
 httpd = http.server.HTTPServer(( args.host, args.port ), MyHandler)
 print('serving at', args.host, ':', args.port, )
