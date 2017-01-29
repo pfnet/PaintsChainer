@@ -19,7 +19,7 @@ from img2imgDataset import ImageAndRefDataset
 
 import unet
 import lnet
-class Paintor:
+class Painter:
     def __init__(self, gpu = 0):
  
         print("start")

@@ -74,11 +74,11 @@ class MyHandler(http.server.CGIHTTPRequestHandler):
 
         if "step" in form:
             if form["step"][0].decode() == "S":
-                paintor.colorize_s(id_str, blur=blur)
+                painter.colorize_s(id_str, blur=blur)
             if form["step"][0].decode() == "L":
-                paintor.colorize_l(id_str)
+                painter.colorize_l(id_str)
         else:
-            paintor.colorize(id_str, blur=blur)
+            painter.colorize(id_str, blur=blur)
         
         content = bytes("{ 'message':'The command Completed Successfully' , 'Status':'200 OK','success':true , 'used':"+str(args.gpu)+"}", "UTF-8")
         self.send_response(200)
@@ -100,7 +100,7 @@ args = parser.parse_args()
 
 print('GPU: {}'.format(args.gpu))
 
-paintor = cgi_exe.Paintor( gpu = args.gpu )
+painter = cgi_exe.Painter( gpu = args.gpu )
 
 httpd = http.server.HTTPServer(( args.host, args.port ), MyHandler)
 print('serving at', args.host, ':', args.port, )
