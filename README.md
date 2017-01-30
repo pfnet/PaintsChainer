@@ -32,3 +32,8 @@ http://paintschainer.preferred.tech/
 Download following model files to  cgi-bin/paint_x2_unet/models/
 
 http://paintschainer.preferred.tech/downloads/
+
+## Acknowledgements
+This project is powered by Preferred Networks.
+Thanks a lot for rezoolab and mattya. This project could not be achived without their great support.
+Line drawing of top image is by ioiori18.
