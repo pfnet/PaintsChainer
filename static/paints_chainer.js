@@ -21,23 +21,17 @@ $(function () {
   });
   $('#img_pane').hide();
 
-  // $('#line_form').on('change', 'input[type="file"]', function(e) {
   $('#load_line_file').on('change', function (e) {
-    var file = e.target.files[0],
-      reader = new FileReader(),
-      $preview = $('.preview');
+    var file = e.target.files[0];
 
     if (file.type.indexOf('image') < 0) {
       return false;
     }
 
-    reader.onload = (function (file) {
-      console.log('up');
-      return function (e) {
-        select_src(e.target.result);
-      };
-    })(file);
-
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      select_src(e.target.result);
+    };
     reader.readAsDataURL(file);
   });
 
@@ -67,7 +61,7 @@ $(function () {
         idstr += String.fromCharCode(ascicode);
       }
     } while (idstr.length < 32);
-    return (idstr);
+    return idstr;
   }
 
   startPaint = function () {
