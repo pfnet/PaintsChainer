@@ -28,8 +28,8 @@ to train 2nd layer using GPU 0 `python train_x2.py -g 0`
 ## DEMO
 http://paintschainer.preferred.tech/
 
-## Licence
-Source code : MIT Licence
+## License
+Source code : MIT License
 
 Pre-trained Model : All Rights Reserved 
 
