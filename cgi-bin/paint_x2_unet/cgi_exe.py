@@ -59,7 +59,6 @@ class Painter:
         array = cuda.to_cpu(array)
         img = cv2.cvtColor(array, cv2.COLOR_YUV2BGR)
         cv2.imwrite(name, img)
-        return img
 
     def liner(self, id_str):
         if self.gpu >= 0:
@@ -74,7 +73,7 @@ class Painter:
         if self.gpu >= 0:
             x = cuda.to_gpu(x)
 
-        y = lnn.calc(Variable(x), test=True)
+        y = lnn.calc(Variable(x, volatile='on'), test=True)
 
         self.save_as_img(y.data[0], self.root + "line/" + id_str + ".jpg")
 
@@ -130,8 +129,11 @@ class Painter:
         if self.gpu >= 0:
             x = cuda.to_gpu(x)
         y = self.cnn_128.calc(Variable(x, volatile='on'), test=True)
+        del x  # release memory
 
         output = cuda.to_cpu(y.data[0])
+        del y  # release memory
+
         self.save_as_img(output, self.outdir_min + id_str + "_0.png")
 
         for ch in range(3):
@@ -143,6 +145,7 @@ class Painter:
         else:
             x = input_bat
         y = self.cnn.calc(Variable(x, volatile='on'), test=True)
+        del x  # release memory
 
         self.save_as_img(y.data[0], self.outdir + id_str + "_0.jpg")
 
