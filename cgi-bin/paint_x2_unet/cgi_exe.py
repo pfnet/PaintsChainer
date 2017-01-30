@@ -47,12 +47,14 @@ class Painter:
         #serializers.load_npz("./cgi-bin/paint_x2_unet/models/liner_f", lnn)
 
 
-    def save_as_img( self, array , name ):
-        array = array.transpose(1,2,0)
-        array = np.clip(array,0,255)
-        img = np.uint8(array)      
-        img = cv2.cvtColor( img , cv2.COLOR_YUV2BGR )
-        cv2.imwrite( name , img )
+    def save_as_img(self, array, name):
+        array = array.transpose(1, 2, 0)
+        array = array.clip(0, 255)
+        array = array.astype(np.uint8)
+        array = cuda.to_cpu(array)
+        img = cv2.cvtColor(array, cv2.COLOR_YUV2BGR)
+        cv2.imwrite(name, img)
+        return img
         
 
     def liner(self, id_str):
@@ -69,12 +71,8 @@ class Painter:
             x = cuda.to_gpu(x)
 
         y = lnn.calc(Variable(x), test=True)
-        if self.gpu >= 0:
-            output = y.data.get()
-        else:
-            output = y.data
 
-        self.save_as_img( output[0], self.root + "line/"+id_str+".jpg" )
+        self.save_as_img(y.data[0], self.root + "line/"+id_str+".jpg" )
 
 
     def colorize_s( self, id_str, blur=0, s_size=128):
@@ -89,13 +87,9 @@ class Painter:
 
         if self.gpu >= 0:
             x = cuda.to_gpu(x)
-        y  = self.cnn_128.calc(Variable(x), test=True )
-        if self.gpu >= 0:
-            output = y.data.get()
-        else:
-            output = y.data
+        y  = self.cnn_128.calc(Variable(x, volatile='on'), test=True )
 
-        self.save_as_img( output[0], self.outdir_min + id_str + ".png" )
+        self.save_as_img(y.data[0], self.outdir_min + id_str + ".png" )
 
     def colorize_l( self, id_str ):
         if self.gpu >= 0:
@@ -108,14 +102,9 @@ class Painter:
 
         if self.gpu >= 0:
             x = cuda.to_gpu(x)
-        y  = self.cnn.calc(Variable(x), test=True )
+        y  = self.cnn.calc(Variable(x, volatile='on'), test=True )
 
-        if self.gpu >= 0:
-            output = y.data.get()
-        else:
-            output = y.data
-
-        self.save_as_img( output[0], self.outdir + id_str + ".jpg" )
+        self.save_as_img(y.data[0], self.outdir + id_str + ".jpg" )
 
 
     def colorize( self, id_str, blur=0, s_size=128):
@@ -134,30 +123,21 @@ class Painter:
 
         if self.gpu >= 0:
             x = cuda.to_gpu(x)
-        y  = self.cnn_128.calc(Variable(x), test=True )
+        y  = self.cnn_128.calc(Variable(x, volatile='on'), test=True)
 
-        if self.gpu >= 0:
-            output = y.data.get()
-        else:
-            output = y.data
-
-        self.save_as_img( output[0], self.outdir_min + id_str +"_"+ str(0) + ".png" )
+        output = cuda.to_cpu(y.data[0])
+        self.save_as_img(output, self.outdir_min + id_str +"_"+ str(0) + ".png" )
 
         for ch in range(3):
-            input_bat[0,1+ch,:] = cv2.resize(output[0,ch,:], (line2.shape[2], line2.shape[1]), interpolation = cv2.INTER_CUBIC)
+            input_bat[0,1+ch,:] = cv2.resize(output[ch,:], (line2.shape[1], line2.shape[2]), interpolation = cv2.INTER_CUBIC)
 
         if self.gpu >= 0:
             x = cuda.to_gpu(input_bat)
         else:
             x = input_bat
-        y = self.cnn.calc(Variable(x), test=True )
+        y = self.cnn.calc(Variable(x, volatile='on'), test=True )
 
-        if self.gpu >= 0:
-            output = y.data.get()
-        else:
-            output = y.data
-
-        self.save_as_img( output[0], self.outdir + id_str +"_"+ str(0) + ".jpg" )
+        self.save_as_img(y.data[0], self.outdir + id_str +"_"+ str(0) + ".jpg" )
 
 
 if __name__ == '__main__':
