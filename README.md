@@ -28,10 +28,19 @@ to train 2nd layer using GPU 0 `python train_x2.py -g 0`
 ## DEMO
 http://paintschainer.preferred.tech/
 
+## Licence
+Source code : MIT Licence
+
+Pre-trained Model : All Rights Reserved 
+
 ## Pre-Trained Models
 Download following model files to  cgi-bin/paint_x2_unet/models/
 
 http://paintschainer.preferred.tech/downloads/
+
+(Copyright 2017 Taizan Yonetsuji All Rights Reserved.)
+
+
 
 ## Acknowledgements
 This project is powered by Preferred Networks.
