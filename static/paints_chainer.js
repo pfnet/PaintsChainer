@@ -5,7 +5,7 @@ $(function () {
   prev_image_id = 'none';
 
   $('#wPaint').wPaint({
-    path: '/static/wPaint/',
+    path: '/wPaint/',
     menuOffsetLeft: -35,
     menuOffsetTop: -50
   });
@@ -79,10 +79,10 @@ $(function () {
   colorize = function () {
     startPaint();
     var ajaxData = new FormData();
-    if (prev_image_id != image_id) {
+    //if (prev_image_id != image_id) {
       ajaxData.append('line', $('#background').attr('src'));
-      prev_image_id = image_id;
-    }
+    //  prev_image_id = image_id;
+    //}
     ajaxData.append('ref', $('#wPaint').wPaint('image'));
     ajaxData.append('blur', $('#blur_k').val());
     ajaxData.append('id', image_id);
@@ -98,8 +98,8 @@ $(function () {
         // location.reload();
         console.log('uploaded');
         var now = new Date().getTime();
-        $('#output').attr('src', '/static/images/out/' + image_id + '_0.jpg?' + now);
-        $('#output_min').attr('src', '/static/images/out_min/' + image_id + '_0.png?' + now);
+        $('#output').attr('src', '/images/out/' + image_id + '_0.jpg?' + now);
+        //$('#output_min').attr('src', '/images/out_min/' + image_id + '_0.png?' + now);
         endPaint();
       }
     });
