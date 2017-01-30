@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>painter</title>
 
@@ -29,62 +29,58 @@
     <!-- main -->
     <script src="paints_chainer.js"></script>
     <!-- fileend -->
-    <!-- wColorPicker workaround for Firefox -->
-    <style>.wColorPicker-palettes-holder {white-space: nowrap;}</style>
+    <style>
+     .container-fluid { margin-left: auto; margin-right: auto; width: 1250px !important; }
+     .wColorPicker-palettes-holder { white-space: nowrap; } /* wColorPicker workaround for Firefox */
+    </style>
   </head>
   <body>
-    <div>
-
-      <div class="content-box">
-
-        <div class="navbar navbar-inverse">
-          <div class="navbar-inner">
-            <a class="brand" href="#">PaintsChainer</a>
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="http://github.com/taizan/PaintsChainer">github</a></li>
-              <li><a href="/downloads">downloads</a></li>
-              <li><a href="http://chainer.org/">chainer</a></li>
-            </ul>
-          </div>
+    <div class="navbar navbar-inverse navbar-static-top" style="margin-bottom: 20px">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">PaintsChainer</a>
+          <ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="http://github.com/taizan/PaintsChainer">github</a></li>
+            <li><a href="/downloads">downloads</a></li>
+            <li><a href="http://chainer.org/">chainer</a></li>
+          </ul>
         </div>
+      </div>
+    </div>
 
-        <center style="width:1250px; margin-left:auto; margin-right:auto; display:block">
-          <pre>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="well text-center">
             <i class="icon-picture"></i> Set Scketch : <input id="load_line_file" type="file"> <button id="submit" class="btn btn-large btn-primary"><i class="icon-edit icon-white"></i> colorize</button> <span id="painting_label" style="display:none">NOW COLORING ...</span>
-          </pre>
+          </div>
           <div style="display:none">
             <label>url:<input id="load_line_url" name="url"></label> <button id="set_line_url">set</button>
             <label>blur_k<input id="blur_k" type="number" name="blur"></label>
           </div>
-
-        </center>
-
-        <div>
-
-          <center id="img_pane" style="width:1250px; margin-left:auto; margin-right:auto; display:block">
-            <div id="wPaint" style="position:relative; float:left; width:512px; height:512px; background-color:rgba(0,0,255,0); margin:2px; border:solid 1px;">
-              <img id="background" style="max-width:512px; max-height:512px;">
-            </div>
-
-            <img id="output" style="float:right; margin:2px; max-width:512px; max-height:512px; border:solid 1px;" src="">
-            <img id="output_min" style="margin-top:45px; margin:2px; float:right;" src="">
-
-          </center>
-
         </div>
-        <div style="width:1250px; margin-left:auto; margin-right:auto;">
-          <br>
-          <div style="margin-left:40px;">
-            <ul>
-              <li>1: select line drawing image<br>(gif & png with a ch is not supported)</li>
-              <li>2: Add hint information using color pen in left image</li>
-              <li>3: Push colorize button</li>
-            </ul>
-          </div>
+      </div>
 
-          <script>
-          </script>
+      <div id="img_pane" class="row-fluid">
+        <div class="span6">
+          <div id="wPaint" style="position:relative; float:left; width:512px; height:512px; background-color:rgba(0,0,255,0); margin:2px; border:solid 1px;">
+            <img id="background" style="max-width:512px; max-height:512px;">
+          </div>
+        </div>
+        <div class="span6">
+          <img id="output" style="float:right; margin:2px; max-width:512px; max-height:512px; border:solid 1px;" src="">
+          <img id="output_min" style="margin-top:45px; margin:2px; float:right;" src="">
+        </div>
+      </div>
+
+      <div class="row-fluid">
+        <div class="span12">
+          <ul>
+            <li>1: select line drawing image<br>(gif & png with a ch is not supported)</li>
+            <li>2: Add hint information using color pen in left image</li>
+            <li>3: Push colorize button</li>
+          </ul>
         </div>
       </div>
     </div>
