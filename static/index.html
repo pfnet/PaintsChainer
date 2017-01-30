@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>painter</title>
+    <title>PaintsChainer</title>
 
     <!-- filestart -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -41,9 +41,9 @@
           <a class="brand" href="#">PaintsChainer</a>
           <ul class="nav">
             <li class="active"><a href="#">Home</a></li>
-            <li><a href="http://github.com/taizan/PaintsChainer">github</a></li>
-            <li><a href="/downloads">downloads</a></li>
-            <li><a href="http://chainer.org/">chainer</a></li>
+            <li><a href="/downloads">Downloads</a></li>
+            <li><a href="http://chainer.org/">Chainer</a></li>
+            <li><a href="http://github.com/taizan/PaintsChainer">GitHub</a></li>
           </ul>
         </div>
       </div>
@@ -53,7 +53,9 @@
       <div class="row-fluid">
         <div class="span12">
           <div class="well text-center">
-            <i class="icon-picture"></i> Set Scketch : <input id="load_line_file" type="file"> <button id="submit" class="btn btn-large btn-primary"><i class="icon-edit icon-white"></i> colorize</button> <span id="painting_label" style="display:none">NOW COLORING ...</span>
+            <i class="icon-picture"></i> Set sketch: <input id="load_line_file" type="file">
+            <button id="submit" class="btn btn-large btn-primary"><i class="icon-edit icon-white"></i> Colorize</button>
+            <span id="painting_label" style="display:none">NOW COLORING ...</span>
           </div>
           <div style="display:none">
             <label>url:<input id="load_line_url" name="url"></label> <button id="set_line_url">set</button>
@@ -76,11 +78,11 @@
 
       <div class="row-fluid">
         <div class="span12">
-          <ul>
-            <li>1: select line drawing image<br>(gif & png with a ch is not supported)</li>
-            <li>2: Add hint information using color pen in left image</li>
-            <li>3: Push colorize button</li>
-          </ul>
+          <ol>
+            <li>Select line drawing image<br>(gif &amp; png with a ch is not supported)</li>
+            <li>Add hint information using color pen in left image</li>
+            <li>Push colorize button</li>
+          </ol>
         </div>
       </div>
     </div>
