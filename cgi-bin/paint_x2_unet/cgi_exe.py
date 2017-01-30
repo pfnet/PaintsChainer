@@ -9,8 +9,6 @@ import six
 import os
 import cv2
 
-from PIL import Image
-
 from chainer import cuda, optimizers, serializers, Variable
 from chainer import training
 from chainer.training import extensions
