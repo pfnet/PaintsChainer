@@ -136,7 +136,7 @@ class Painter:
 
         for ch in range(3):
             input_bat[0, 1 + ch, :] = cv2.resize(
-                output[ch, :], (line2.shape[1], line2.shape[2]), interpolation=cv2.INTER_CUBIC)
+                output[ch, :], (line2.shape[2], line2.shape[1]), interpolation=cv2.INTER_CUBIC)
 
         if self.gpu >= 0:
             x = cuda.to_gpu(input_bat)
