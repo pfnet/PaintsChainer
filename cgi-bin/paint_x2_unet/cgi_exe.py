@@ -123,13 +123,12 @@ class Painter:
             cuda.get_device(self.gpu).use()
 
         dataset = ImageAndRefDataset([id_str+".png"],self.root+"line/",self.root+"ref/" ) 
-        test_in_s, test_in = dataset.get_example(0,minimize=True)
+        line ,line2 =  dataset.get_example(0, minimize=True)
         # 1st fixed to 128*128
-        x = np.zeros((1, 4, test_in_s.shape[1], test_in_s.shape[2])).astype('f')
-        input_bat = np.zeros((1, 4, test_in.shape[1], test_in.shape[2] )).astype('f')
+        x = np.zeros((1, 4, line.shape[1], line.shape[2]), dtype='f')
+        input_bat = np.zeros((1, 4, line2.shape[1], line2.shape[2]), dtype='f')
         print(input_bat.shape)
 
-        line ,line2 =  dataset.get_example(0,minimize=True)
         x[0,:] = line
         input_bat[0,0,:] = line2
 
@@ -145,7 +144,7 @@ class Painter:
         self.save_as_img( output[0], self.outdir_min + id_str +"_"+ str(0) + ".png" )
 
         for ch in range(3):
-            input_bat[0,1+ch,:] = cv2.resize(output[0,ch,:], (test_in.shape[2], test_in.shape[1]), interpolation = cv2.INTER_CUBIC)
+            input_bat[0,1+ch,:] = cv2.resize(output[0,ch,:], (line2.shape[2], line2.shape[1]), interpolation = cv2.INTER_CUBIC)
 
         if self.gpu >= 0:
             x = cuda.to_gpu(input_bat)
