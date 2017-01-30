@@ -1,5 +1,6 @@
 $(function() {
         image_id = "test_id"
+        prev_image_id = "none"
 
         $('#wPaint').wPaint({
             path: '/static/wPaint/',
@@ -84,10 +85,13 @@ $(function() {
         colorize = function(){
             startPaint()
             var ajaxData = new FormData();
-            ajaxData.append('line', $("#background").attr("src") );
-            ajaxData.append('ref', $("#wPaint").wPaint("image") );
-            ajaxData.append('blur', $("#blur_k").val() );
-            ajaxData.append('id', image_id );
+            if (prev_image_id != image_id) {
+                ajaxData.append('line', $("#background").attr("src"));
+                prev_image_id = image_id;
+            }
+            ajaxData.append('ref', $("#wPaint").wPaint("image"));
+            ajaxData.append('blur', $("#blur_k").val());
+            ajaxData.append('id', image_id);
             $.ajax({
                 url: "/post",
                 data: ajaxData,
