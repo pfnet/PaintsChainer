@@ -134,7 +134,7 @@ class Painter:
         output = cuda.to_cpu(y.data[0])
         del y  # release memory
 
-        self.save_as_img(output, self.outdir_min + id_str + "_0.png")
+        # self.save_as_img(output, self.outdir_min + id_str + "_0.png")
 
         for ch in range(3):
             input_bat[0, 1 + ch, :] = cv2.resize(
