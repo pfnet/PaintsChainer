@@ -74,9 +74,13 @@ $(function () {
   }
 
   function paint(data) {
+    var origin = '';
+    if (location.hostname === 'paintschainer.preferred.tech') {
+      origin = 'http://paintschainer' + (Math.floor(Math.random() * 5) + 1) + '.preferred.tech'; // 1 ~ 5
+    }
     $.ajax({
       type: 'POST',
-      url: '/post',
+      url: origin + '/post',
       data: data,
       cache: false,
       contentType: false,
@@ -91,8 +95,8 @@ $(function () {
         console.log('uploaded');
         $('#painting_status').hide();
         var now = new Date().getTime();
-        $('#output').attr('src', '/images/out/' + image_id + '_0.jpg?' + now).show();
-        $('#output_min').attr('src', '/images/out_min/' + image_id + '_0.png?' + now).show();
+        $('#output').attr('src', origin + '/images/out/' + image_id + '_0.jpg?' + now).show();
+        $('#output_min').attr('src', origin + '/images/out_min/' + image_id + '_0.png?' + now).show();
       },
       error: function () {
         $('#painting_status').attr('class', 'text-error').text('SERVER ERROR').show();
