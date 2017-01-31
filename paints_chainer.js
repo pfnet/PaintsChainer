@@ -29,7 +29,6 @@ $(function () {
     menuOffsetTop: -50
   });
 
-  $('#submit').prop('disabled', true);
   $('#submit').click(function () {
     if (!$('#background').attr('src')) {
       alert('select a file');
@@ -64,7 +63,6 @@ $(function () {
       .height($('#background').height());
 
     $('#wPaint').wPaint('resize');
-    $('#submit').prop('disabled', true);
 
     colorize(uniqueid()); // update image_id
   });
