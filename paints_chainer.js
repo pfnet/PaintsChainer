@@ -1,4 +1,4 @@
-var image_id, prev_image_id, colorize, select_src;
+var image_id, prev_image_id, colorize;
 
 // cf. https://github.com/websanova/wPaint/blob/master/src/wPaint.js#L243
 $.fn.wPaint.extend({
@@ -48,11 +48,7 @@ $(function () {
       return false;
     }
 
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      select_src(e.target.result);
-    };
-    reader.readAsDataURL(file);
+    set_file(file);
   });
 
   $('#output').bind('load', function () {
@@ -140,11 +136,11 @@ $(function () {
     });
   };
 
-  select_src = function (src) {
-    console.log('select src');
+  function set_file(file) {
+    console.log('set file');
     $('#img_pane').show('fast', function () {
       image_id = uniqueid();
-      $('#background').attr('src', src);
+      $('#background').attr('src', window.URL.createObjectURL(file));
     });
   };
 });
