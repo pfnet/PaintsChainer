@@ -1,4 +1,4 @@
-var image_id, prev_image_id, startPaint, endPaint, colorize, enable_interactive, select_src;
+var image_id, prev_image_id, startPaint, endPaint, colorize, select_src;
 
 $(function () {
   image_id = 'test_id';
@@ -121,10 +121,6 @@ $(function () {
         });
       });
     });
-  };
-
-  enable_interactive = function () {
-    $('.wPaint-canvas').mouseup(colorize);
   };
 
   $('#background').load(function () {
