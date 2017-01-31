@@ -110,7 +110,7 @@ class MyHandler(http.server.CGIHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Origin", "http://paintschainer.preferred.tech") # hard coding...
         self.end_headers()
         self.wfile.write(content)
-        # t.append(time.time())
+
 
 parser = argparse.ArgumentParser(
     description='chainer line drawing colorization server')
