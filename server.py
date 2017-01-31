@@ -108,6 +108,7 @@ class MyHandler(http.server.CGIHTTPRequestHandler):
         self.send_header("Content-type", "application/json")
         self.send_header("Content-Length", len(content))
         self.send_header("Access-Control-Allow-Origin", "http://paintschainer.preferred.tech") # hard coding...
+        self.send_header("Access-Control-Allow-Origin", "http://paintschainer5.preferred.tech") # hard coding...
         self.end_headers()
         self.wfile.write(content)
 
