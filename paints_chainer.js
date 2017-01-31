@@ -104,7 +104,7 @@ $(function () {
       ctxSave.drawImage(wPaint.canvasBg, 0, 0);
       ctxSave.drawImage(wPaint.canvas, 0, 0);
       canvasSave.toBlob(function (ref_blob) {
-        if (ref_blob.size > 50000) {
+        if (ref_blob.size > 30000) {
             alert("file size over");
             return;
         }
