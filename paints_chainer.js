@@ -111,31 +111,35 @@ $(function () {
     });
   }
 
-  function toBlob(img, fn) {
-    var canvas = document.createElement('canvas');
-    canvas.width = img.naturalWidth || img.width;
-    canvas.height = img.naturalHeight || img.height;
-    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-    canvas.toBlob(fn);
+  function blobUrlToBlob(url, fn) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      fn(xhr.response);
+    };
+    xhr.responseType = 'blob';
+    xhr.open('GET', url);
+    xhr.send();
   }
 
   function colorize(new_image_id) {
-    toBlob($('#background')[0], function (line_blob) {
-      var ajaxData = new FormData();
-      if (new_image_id) {
-        ajaxData.append('line', line_blob);
-        image_id = new_image_id;
+    $('#wPaint').wPaint('imageCanvas').toBlob(function (ref_blob) {
+      if (ref_blob.size > 30000) {
+        alert('file size over');
+        return;
       }
-      $('#wPaint').wPaint('imageCanvas').toBlob(function (ref_blob) {
-        if (ref_blob.size > 30000) {
-          alert('file size over');
-          return;
-        }
-        ajaxData.append('ref', ref_blob);
-        ajaxData.append('blur', $('#blur_k').val());
-        ajaxData.append('id', image_id);
+      var ajaxData = new FormData();
+      ajaxData.append('id', new_image_id || image_id);
+      ajaxData.append('blur', $('#blur_k').val());
+      ajaxData.append('ref', ref_blob);
+      if (new_image_id) {
+        image_id = new_image_id;
+        blobUrlToBlob($('#background').attr('src'), function (line_blob) {
+          ajaxData.append('line', line_blob);
+          paint(ajaxData);
+        });
+      } else {
         paint(ajaxData);
-      });
+      }
     });
   };
 
