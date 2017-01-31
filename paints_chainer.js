@@ -1,4 +1,4 @@
-var image_id, prev_image_id, colorize;
+var image_id;
 
 // cf. https://github.com/websanova/wPaint/blob/master/src/wPaint.js#L243
 $.fn.wPaint.extend({
@@ -22,7 +22,6 @@ $.fn.wPaint.extend({
 
 $(function () {
   image_id = 'test_id';
-  prev_image_id = 'none';
 
   $('#wPaint').wPaint({
     path: '/wPaint/',
@@ -67,7 +66,8 @@ $(function () {
 
     $('#wPaint').wPaint('resize');
     $('#submit').prop('disabled', true);
-    colorize();
+
+    colorize(uniqueid()); // update image_id
   });
 
   //--- functions
@@ -119,10 +119,13 @@ $(function () {
     canvas.toBlob(fn);
   }
 
-  colorize = function () {
+  function colorize(new_image_id) {
     toBlob($('#background')[0], function (line_blob) {
       var ajaxData = new FormData();
-      ajaxData.append('line', line_blob);
+      if (new_image_id) {
+        ajaxData.append('line', line_blob);
+        image_id = new_image_id;
+      }
       $('#wPaint').wPaint('imageCanvas').toBlob(function (ref_blob) {
         if (ref_blob.size > 30000) {
           alert('file size over');
@@ -139,7 +142,6 @@ $(function () {
   function set_file(file) {
     console.log('set file');
     $('#img_pane').show('fast', function () {
-      image_id = uniqueid();
       $('#background').attr('src', window.URL.createObjectURL(file));
     });
   };
