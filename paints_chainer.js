@@ -23,11 +23,13 @@ $.fn.wPaint.extend({
 $(function () {
   image_id = 'test_id';
 
+  $('#img_pane').show(); // for $.fn.wPaint
   $('#wPaint').wPaint({
     path: '/wPaint/',
     menuOffsetLeft: -35,
     menuOffsetTop: -50
   });
+  $('#img_pane').hide();
 
   $('#submit').click(function () {
     if (!$('#background').attr('src')) {
@@ -36,7 +38,6 @@ $(function () {
       colorize();
     }
   });
-  $('#img_pane').hide();
 
   $('#load_line_file').on('change', function (e) {
     var file = e.target.files[0];
