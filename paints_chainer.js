@@ -1,5 +1,25 @@
 var image_id, prev_image_id, colorize, select_src;
 
+// cf. https://github.com/websanova/wPaint/blob/master/src/wPaint.js#L243
+$.fn.wPaint.extend({
+  getImageCanvas: function (withBg) { // getCanvas is bad name (conflict).
+    var canvasSave = document.createElement('canvas'),
+        ctxSave = canvasSave.getContext('2d');
+
+    withBg = withBg === false ? false : true;
+
+    $(canvasSave)
+      .css({display: 'none', position: 'absolute', left: 0, top: 0})
+      .attr('width', this.width)
+      .attr('height', this.height);
+
+    if (withBg) { ctxSave.drawImage(this.canvasBg, 0, 0); }
+    ctxSave.drawImage(this.canvas, 0, 0);
+
+    return canvasSave;
+  }
+});
+
 $(function () {
   image_id = 'test_id';
   prev_image_id = 'none';
@@ -107,19 +127,7 @@ $(function () {
     toBlob($('#background')[0], function (line_blob) {
       var ajaxData = new FormData();
       ajaxData.append('line', line_blob);
-
-      // cf. https://github.com/websanova/wPaint/blob/master/src/wPaint.js#L243
-      var wPaint = $('#wPaint').data('wPaint');
-      var canvasSave = document.createElement('canvas'),
-          ctxSave = canvasSave.getContext('2d');
-      $(canvasSave)
-        .css({display: 'none', position: 'absolute', left: 0, top: 0})
-        .attr('width', wPaint.width)
-        .attr('height', wPaint.height);
-
-      ctxSave.drawImage(wPaint.canvasBg, 0, 0);
-      ctxSave.drawImage(wPaint.canvas, 0, 0);
-      canvasSave.toBlob(function (ref_blob) {
+      $('#wPaint').wPaint('imageCanvas').toBlob(function (ref_blob) {
         if (ref_blob.size > 30000) {
           alert('file size over');
           return;
