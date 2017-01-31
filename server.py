@@ -53,13 +53,13 @@ class MyHandler(http.server.CGIHTTPRequestHandler):
 
         if "line" in form:
             bin1 = form["line"][0]
-            fout1 = open("./static/images/line/" + id_str + ".png", 'wb')
+            fout1 = open("./images/line/" + id_str + ".png", 'wb')
             fout1.write(bin1)
             fout1.close()
 
         if "ref" in form:
             bin2 = form["ref"][0]
-            fout2 = open("./static/images/ref/" + id_str + ".png", 'wb')
+            fout2 = open("./images/ref/" + id_str + ".png", 'wb')
             fout2.write(bin2)
             fout2.close()
 

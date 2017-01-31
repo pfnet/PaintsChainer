@@ -54,7 +54,7 @@ boot local server
 `python server.py`
 
 access to localhost
-`localhost:8000/static/`
+`localhost:8000/`
 
 
 ## Learning
