@@ -81,21 +81,21 @@ $(function () {
 
   function paint(data) {
     $.ajax({
+      type: 'POST',
       url: '/post',
       data: data,
       cache: false,
       contentType: false,
       processData: false,
-      type: 'POST',
-      dataType: 'json',
-      complete: function (data) {
-        // location.reload();
+      dataType: 'text', // server response is broken
+      beforeSend: startPaint,
+      success: function () {
         console.log('uploaded');
         var now = new Date().getTime();
         $('#output').attr('src', '/images/out/' + image_id + '_0.jpg?' + now);
         $('#output_min').attr('src', '/images/out_min/' + image_id + '_0.png?' + now);
-        endPaint();
-      }
+      },
+      complete: endPaint
     });
   }
 
@@ -108,7 +108,6 @@ $(function () {
   }
 
   colorize = function () {
-    startPaint();
     toBlob($('#background')[0], function (line_blob) {
       var ajaxData = new FormData();
       ajaxData.append('line', line_blob);
