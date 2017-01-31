@@ -79,6 +79,26 @@ $(function () {
     console.log('coloring finish');
   };
 
+  function paint(data) {
+    $.ajax({
+      url: '/post',
+      data: data,
+      cache: false,
+      contentType: false,
+      processData: false,
+      type: 'POST',
+      dataType: 'json',
+      complete: function (data) {
+        // location.reload();
+        console.log('uploaded');
+        var now = new Date().getTime();
+        $('#output').attr('src', '/images/out/' + image_id + '_0.jpg?' + now);
+        $('#output_min').attr('src', '/images/out_min/' + image_id + '_0.png?' + now);
+        endPaint();
+      }
+    });
+  }
+
   function toBlob(img, fn) {
     var canvas = document.createElement('canvas');
     canvas.width = img.naturalWidth || img.width;
@@ -112,23 +132,7 @@ $(function () {
         ajaxData.append('ref', ref_blob);
         ajaxData.append('blur', $('#blur_k').val());
         ajaxData.append('id', image_id);
-        $.ajax({
-          url: '/post',
-          data: ajaxData,
-          cache: false,
-          contentType: false,
-          processData: false,
-          type: 'POST',
-          dataType: 'json',
-          complete: function (data) {
-            // location.reload();
-            console.log('uploaded');
-            var now = new Date().getTime();
-            $('#output').attr('src', '/images/out/' + image_id + '_0.jpg?' + now);
-            $('#output_min').attr('src', '/images/out_min/' + image_id + '_0.png?' + now);
-            endPaint();
-          }
-        });
+        paint(ajaxData);
       });
     });
   };
