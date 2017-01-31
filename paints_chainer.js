@@ -130,7 +130,7 @@ $(function () {
       blobUrlToBlob($('#background').attr('src'), function (line_blob) {
         ajaxData.append('line', line_blob);
         paint(ajaxData);
-      }
+      });
     });
   };
 
