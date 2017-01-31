@@ -124,15 +124,13 @@ $(function () {
       ajaxData.append('id', new_image_id || image_id);
       ajaxData.append('blur', $('#blur_k').val());
       ajaxData.append('ref', ref_blob);
-      if ( true ) {
+      if ( new_image_id ) {
         image_id = new_image_id;
-        blobUrlToBlob($('#background').attr('src'), function (line_blob) {
-          ajaxData.append('line', line_blob);
-          paint(ajaxData);
-        });
-      } else {
-        paint(ajaxData);
       }
+      blobUrlToBlob($('#background').attr('src'), function (line_blob) {
+        ajaxData.append('line', line_blob);
+        paint(ajaxData);
+      });
     });
   };
 
