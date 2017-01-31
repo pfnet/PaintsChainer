@@ -1,17 +1,36 @@
-var image_id, prev_image_id, startPaint, endPaint, colorize, enable_interactive, select_src;
+var image_id;
+
+// cf. https://github.com/websanova/wPaint/blob/master/src/wPaint.js#L243
+$.fn.wPaint.extend({
+  getImageCanvas: function (withBg) { // getCanvas is bad name (conflict).
+    var canvasSave = document.createElement('canvas'),
+        ctxSave = canvasSave.getContext('2d');
+
+    withBg = withBg === false ? false : true;
+
+    $(canvasSave)
+      .css({display: 'none', position: 'absolute', left: 0, top: 0})
+      .attr('width', this.width)
+      .attr('height', this.height);
+
+    if (withBg) { ctxSave.drawImage(this.canvasBg, 0, 0); }
+    ctxSave.drawImage(this.canvas, 0, 0);
+
+    return canvasSave;
+  }
+});
 
 $(function () {
   image_id = 'test_id';
-  prev_image_id = 'none';
 
+  $('#img_pane').show(); // for $.fn.wPaint
   $('#wPaint').wPaint({
     path: '/wPaint/',
     menuOffsetLeft: -35,
     menuOffsetTop: -50
   });
+  $('#img_pane').hide();
 
-  $('#painting_label').hide();
-  $('#submit').prop('disabled', true);
   $('#submit').click(function () {
     if (!$('#background').attr('src')) {
       alert('select a file');
@@ -19,7 +38,6 @@ $(function () {
       colorize();
     }
   });
-  $('#img_pane').hide();
 
   $('#load_line_file').on('change', function (e) {
     var file = e.target.files[0];
@@ -28,27 +46,18 @@ $(function () {
       return false;
     }
 
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      select_src(e.target.result);
-    };
-    reader.readAsDataURL(file);
+    set_file(file);
   });
 
-
-  $('#set_line_url').click(function () {
-    // currently not work
-    select_src($('#load_line_url').val());
-  });
-
-
-  $('#output').bind('load', function () {
-    $('#output')
+  $('#background').load(function () {
+    $('#wPaint')
+      .width($('#background').width())
       .height($('#background').height())
-      .width($('#background').width());
-    $('#img_pane')
-      .width($('#output').width() * 2.3 + 24)
-      .height($('#output').height() + 20);
+      .wPaint('resize');
+    var wPaintOuterWidth = $('#wPaint').outerWidth(true);
+    $('#img_pane .span6').width(wPaintOuterWidth);
+    $('#img_pane').width(wPaintOuterWidth * 2 + 30);
+    colorize(uniqueid()); // update image_id
   });
 
   //--- functions
@@ -64,92 +73,73 @@ $(function () {
     return idstr;
   }
 
-  startPaint = function () {
-    $('#painting_label').show();
-    $('#submit').prop('disabled', true);
-    console.log('coloring start');
-  };
-
-  endPaint = function () {
-    $('#painting_label').hide();
-    $('#submit').prop('disabled', false);
-    console.log('coloring finish');
-  };
-
-  function toBlob(img, fn) {
-    var canvas = document.createElement('canvas');
-    canvas.width = img.naturalWidth || img.width;
-    canvas.height = img.naturalHeight || img.height;
-    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-    canvas.toBlob(fn);
+  function paint(data) {
+    $.ajax({
+      type: 'POST',
+      url: '/post',
+      data: data,
+      cache: false,
+      contentType: false,
+      processData: false,
+      dataType: 'text', // server response is broken
+      beforeSend: function () {
+        $('#painting_status').attr('class', '').text('NOW COLORING ...').show();
+        $('#submit').prop('disabled', true);
+        console.log('coloring start');
+      },
+      success: function () {
+        console.log('uploaded');
+        $('#painting_status').hide();
+        var now = new Date().getTime();
+        $('#output').attr('src', '/images/out/' + image_id + '_0.jpg?' + now).show();
+        $('#output_min').attr('src', '/images/out_min/' + image_id + '_0.png?' + now).show();
+      },
+      error: function () {
+        $('#painting_status').attr('class', 'text-error').text('SERVER ERROR').show();
+      },
+      complete: function () {
+        $('#submit').prop('disabled', false);
+        console.log('coloring finish');
+      }
+    });
   }
 
-  colorize = function () {
-    startPaint();
-    toBlob($('#background')[0], function (line_blob) {
+  function blobUrlToBlob(url, fn) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      fn(xhr.response);
+    };
+    xhr.responseType = 'blob';
+    xhr.open('GET', url);
+    xhr.send();
+  }
+
+  function colorize(new_image_id) {
+    $('#wPaint').wPaint('imageCanvas').toBlob(function (ref_blob) {
+      if (ref_blob.size > 30000) {
+        alert('file size over');
+        return;
+      }
       var ajaxData = new FormData();
-      ajaxData.append('line', line_blob);
-
-      // cf. https://github.com/websanova/wPaint/blob/master/src/wPaint.js#L243
-      var wPaint = $('#wPaint').data('wPaint');
-      var canvasSave = document.createElement('canvas'),
-          ctxSave = canvasSave.getContext('2d');
-      $(canvasSave)
-        .css({display: 'none', position: 'absolute', left: 0, top: 0})
-        .attr('width', wPaint.width)
-        .attr('height', wPaint.height);
-
-      ctxSave.drawImage(wPaint.canvasBg, 0, 0);
-      ctxSave.drawImage(wPaint.canvas, 0, 0);
-      canvasSave.toBlob(function (ref_blob) {
-        if (ref_blob.size > 30000) {
-            alert("file size over");
-            return;
-        }
-        ajaxData.append('ref', ref_blob);
-        ajaxData.append('blur', $('#blur_k').val());
-        ajaxData.append('id', image_id);
-        $.ajax({
-          url: '/post',
-          data: ajaxData,
-          cache: false,
-          contentType: false,
-          processData: false,
-          type: 'POST',
-          dataType: 'json',
-          complete: function (data) {
-            // location.reload();
-            console.log('uploaded');
-            var now = new Date().getTime();
-            $('#output').attr('src', '/images/out/' + image_id + '_0.jpg?' + now);
-            $('#output_min').attr('src', '/images/out_min/' + image_id + '_0.png?' + now);
-            endPaint();
-          }
+      ajaxData.append('id', new_image_id || image_id);
+      ajaxData.append('blur', $('#blur_k').val());
+      ajaxData.append('ref', ref_blob);
+      if (new_image_id) {
+        image_id = new_image_id;
+        blobUrlToBlob($('#background').attr('src'), function (line_blob) {
+          ajaxData.append('line', line_blob);
+          paint(ajaxData);
         });
-      });
+      } else {
+        paint(ajaxData);
+      }
     });
   };
 
-  enable_interactive = function () {
-    $('.wPaint-canvas').mouseup(colorize);
-  };
-
-  $('#background').load(function () {
-      $('#wPaint')
-        .width($('#background').width())
-        .height($('#background').height());
-
-      $('#wPaint').wPaint('resize');
-      $('#submit').prop('disabled', true);
-      colorize();
-    });
-
-
-  select_src = function (src) {
-    console.log("select src")
+  function set_file(file) {
+    console.log('set file');
     $('#img_pane').show('fast', function () {
-      image_id = uniqueid();
-      $('#background').attr('src', src);
+      $('#background').attr('src', window.URL.createObjectURL(file));
     });
   };
 });

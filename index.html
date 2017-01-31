@@ -30,7 +30,8 @@
     <script src="paints_chainer.js?ver3"></script>
     <!-- fileend -->
     <style>
-     .container-fluid { margin-left: auto; margin-right: auto; width: 1250px !important; }
+     .container-fluid, .row-fluid { margin-left: auto; margin-right: auto; }
+     .container-fluid { width: 1066px !important; }
      .wColorPicker-palettes-holder { white-space: nowrap; } /* wColorPicker workaround for Firefox */
     </style>
   </head>
@@ -54,24 +55,23 @@
         <div class="span12">
           <div class="well text-center">
             <i class="icon-picture"></i> Set sketch: <input id="load_line_file" type="file">
-            <button id="submit" class="btn btn-large btn-primary"><i class="icon-edit icon-white"></i> Colorize</button>
-            <span id="painting_label" style="display:none">NOW COLORING ...</span>
+            <button id="submit" class="btn btn-large btn-primary" disabled><i class="icon-edit icon-white"></i> Colorize</button>
+            <span id="painting_status" style="display:none"></span>
           </div>
           <div style="display:none">
-            <label>url:<input id="load_line_url" name="url"></label> <button id="set_line_url">set</button>
             <label>blur_k<input id="blur_k" type="number" name="blur"></label>
           </div>
         </div>
       </div>
 
-      <div id="img_pane" class="row-fluid">
+      <div id="img_pane" class="row-fluid" style="display:none">
         <div class="span6">
-          <div id="wPaint" style="position:relative; float:left; width:512px; height:512px; background-color:rgba(0,0,255,0); margin:2px; border:solid 1px;">
-            <img id="background" style="max-width:512px; max-height:512px;">
+          <div id="wPaint" style="position:relative; background-color:rgba(0,0,255,0); width:512px; height:512px; margin:2px; border:solid 1px">
+            <img id="background" style="max-width:512px; max-height:512px">
           </div>
         </div>
-        <div class="span6">
-          <img id="output" style="float:right; margin:2px; max-width:512px; max-height:512px; border:solid 1px;" src="">
+        <div class="span6" style="margin-left:30px">
+          <img id="output" style="display:none; max-width:512px; max-height:512px; margin:2px; border:solid 1px">
         </div>
       </div>
 
