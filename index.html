@@ -30,7 +30,8 @@
     <script src="paints_chainer.js?ver3"></script>
     <!-- fileend -->
     <style>
-     .container-fluid { margin-left: auto; margin-right: auto; width: 1250px !important; }
+     .container-fluid, .row-fluid { margin-left: auto; margin-right: auto; }
+     .container-fluid { width: 1066px !important; }
      .wColorPicker-palettes-holder { white-space: nowrap; } /* wColorPicker workaround for Firefox */
     </style>
   </head>
@@ -65,12 +66,12 @@
 
       <div id="img_pane" class="row-fluid" style="display:none">
         <div class="span6">
-          <div id="wPaint" style="position:relative; float:left; width:512px; height:512px; background-color:rgba(0,0,255,0); margin:2px; border:solid 1px;">
-            <img id="background" style="max-width:512px; max-height:512px;">
+          <div id="wPaint" style="position:relative; background-color:rgba(0,0,255,0); width:512px; height:512px; margin:2px; border:solid 1px">
+            <img id="background" style="max-width:512px; max-height:512px">
           </div>
         </div>
-        <div class="span6">
-          <img id="output" style="float:right; margin:2px; max-width:512px; max-height:512px; border:solid 1px;" src="">
+        <div class="span6" style="margin-left:30px">
+          <img id="output" style="display:none; max-width:512px; max-height:512px; margin:2px; border:solid 1px">
         </div>
       </div>
 
