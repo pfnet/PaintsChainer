@@ -7,6 +7,7 @@ import os
 import sys
 import time
 import json
+import re
 
 import argparse
 
@@ -47,7 +48,7 @@ class MyHandler(http.server.CGIHTTPRequestHandler):
 
         if "id" in form:
             id_str = form["id"][0]
-            id_str = id_str.decode()
+            id_str = re.sub(r'\W+', '', id_str.decode() )
         else:
             self.ret_result(False)
             return
