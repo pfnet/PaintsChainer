@@ -35,13 +35,6 @@ $(function () {
     reader.readAsDataURL(file);
   });
 
-
-  $('#set_line_url').click(function () {
-    // currently not work
-    select_src($('#load_line_url').val());
-  });
-
-
   $('#output').bind('load', function () {
     $('#output')
       .height($('#background').height())
