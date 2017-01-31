@@ -7,7 +7,6 @@ import chainer.links as L
 import chainer.datasets.image_dataset as ImageDataset
 import six
 import os
-from PIL import Image
 
 from chainer import cuda, optimizers, serializers, Variable
 import cv2
