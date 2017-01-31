@@ -127,7 +127,7 @@ class Painter:
         input_bat[0, 0, :] = line2
 
         if self.gpu >= 0:
-            x = cuda.to_gpu(x)
+            x = cuda.to_gpu(x, cuda.Stream.null)
         y = self.cnn_128.calc(Variable(x, volatile='on'), test=True)
         del x  # release memory
 
@@ -141,7 +141,7 @@ class Painter:
                 output[ch, :], (line2.shape[2], line2.shape[1]), interpolation=cv2.INTER_CUBIC)
 
         if self.gpu >= 0:
-            x = cuda.to_gpu(input_bat)
+            x = cuda.to_gpu(input_bat, cuda.Stream.null)
         else:
             x = input_bat
         y = self.cnn.calc(Variable(x, volatile='on'), test=True)

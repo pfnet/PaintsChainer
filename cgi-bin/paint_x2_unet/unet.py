@@ -57,35 +57,35 @@ class UNET(chainer.Chain):
             # l = L.Linear(3*3*256, 2)'
         )
 
-    def calc(self, x, test=False):
-        e0 = F.relu(self.bnc0(self.c0(x), test=test))
-        e1 = F.relu(self.bnc1(self.c1(e0), test=test))
-        e2 = F.relu(self.bnc2(self.c2(e1), test=test))
+    def calc(self, x, test=False, use_cudnn=False):
+        e0 = F.relu(self.bnc0(self.c0(x), test=test), use_cudnn)
+        e1 = F.relu(self.bnc1(self.c1(e0), test=test), use_cudnn)
+        e2 = F.relu(self.bnc2(self.c2(e1), test=test), use_cudnn)
         del e1
-        e3 = F.relu(self.bnc3(self.c3(e2), test=test))
-        e4 = F.relu(self.bnc4(self.c4(e3), test=test))
+        e3 = F.relu(self.bnc3(self.c3(e2), test=test), use_cudnn)
+        e4 = F.relu(self.bnc4(self.c4(e3), test=test), use_cudnn)
         del e3
-        e5 = F.relu(self.bnc5(self.c5(e4), test=test))
-        e6 = F.relu(self.bnc6(self.c6(e5), test=test))
+        e5 = F.relu(self.bnc5(self.c5(e4), test=test), use_cudnn)
+        e6 = F.relu(self.bnc6(self.c6(e5), test=test), use_cudnn)
         del e5
-        e7 = F.relu(self.bnc7(self.c7(e6), test=test))
-        e8 = F.relu(self.bnc8(self.c8(e7), test=test))
+        e7 = F.relu(self.bnc7(self.c7(e6), test=test), use_cudnn)
+        e8 = F.relu(self.bnc8(self.c8(e7), test=test), use_cudnn)
 
-        d8 = F.relu(self.bnd8(self.dc8(F.concat([e7, e8])), test=test))
+        d8 = F.relu(self.bnd8(self.dc8(F.concat([e7, e8])), test=test), use_cudnn)
         del e7, e8
-        d7 = F.relu(self.bnd7(self.dc7(d8), test=test))
+        d7 = F.relu(self.bnd7(self.dc7(d8), test=test), use_cudnn)
         del d8
-        d6 = F.relu(self.bnd6(self.dc6(F.concat([e6, d7])), test=test))
+        d6 = F.relu(self.bnd6(self.dc6(F.concat([e6, d7])), test=test), use_cudnn)
         del d7, e6
-        d5 = F.relu(self.bnd5(self.dc5(d6), test=test))
+        d5 = F.relu(self.bnd5(self.dc5(d6), test=test), use_cudnn)
         del d6
-        d4 = F.relu(self.bnd4(self.dc4(F.concat([e4, d5])), test=test))
+        d4 = F.relu(self.bnd4(self.dc4(F.concat([e4, d5])), test=test), use_cudnn)
         del d5, e4
-        d3 = F.relu(self.bnd3(self.dc3(d4), test=test))
+        d3 = F.relu(self.bnd3(self.dc3(d4), test=test), use_cudnn)
         del d4
-        d2 = F.relu(self.bnd2(self.dc2(F.concat([e2, d3])), test=test))
+        d2 = F.relu(self.bnd2(self.dc2(F.concat([e2, d3])), test=test), use_cudnn)
         del d3, e2
-        d1 = F.relu(self.bnd1(self.dc1(d2), test=test))
+        d1 = F.relu(self.bnd1(self.dc1(d2), test=test), use_cudnn)
         del d2
         d0 = self.dc0(F.concat([e0, d1]))
 
