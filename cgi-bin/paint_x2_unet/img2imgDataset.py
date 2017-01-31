@@ -31,7 +31,7 @@ class ImageAndRefDataset(chainer.dataset.DatasetMixin):
         #image1 = ImageDataset._read_image_as_array(path1, self._dtype)
 
         image1 = cv2.imread(path1, cv2.IMREAD_GRAYSCALE)
-        print("load:" + path1, os.path.isfile(path1), iamge1 is None)
+        print("load:" + path1, os.path.isfile(path1), image1 is None)
         image1 = np.asarray(image1, self._dtype)
 
         _image1 = image1.copy()
