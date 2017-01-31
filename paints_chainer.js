@@ -44,6 +44,16 @@ $(function () {
       .height($('#output').height() + 20);
   });
 
+  $('#background').load(function () {
+    $('#wPaint')
+      .width($('#background').width())
+      .height($('#background').height());
+
+    $('#wPaint').wPaint('resize');
+    $('#submit').prop('disabled', true);
+    colorize();
+  });
+
   //--- functions
 
   function uniqueid() {
@@ -122,16 +132,6 @@ $(function () {
       });
     });
   };
-
-  $('#background').load(function () {
-    $('#wPaint')
-      .width($('#background').width())
-      .height($('#background').height());
-
-    $('#wPaint').wPaint('resize');
-    $('#submit').prop('disabled', true);
-    colorize();
-  });
 
   select_src = function (src) {
     console.log('select src');
