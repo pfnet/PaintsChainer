@@ -49,19 +49,26 @@ class MyHandler(http.server.CGIHTTPRequestHandler):
             id_str = form["id"][0]
             id_str = id_str.decode()
         else:
-            id_str = "test"
+            self.ret_result(False)
+            return
 
         if "line" in form:
             bin1 = form["line"][0]
             fout1 = open("./images/line/" + id_str + ".png", 'wb')
             fout1.write(bin1)
             fout1.close()
+        else:
+            self.ret_result(False)
+            return
 
         if "ref" in form:
             bin2 = form["ref"][0]
             fout2 = open("./images/ref/" + id_str + ".png", 'wb')
             fout2.write(bin2)
             fout2.close()
+        else:
+            self.ret_result(False)
+            return
 
         blur = 0
         if "blur" in form:
@@ -81,18 +88,28 @@ class MyHandler(http.server.CGIHTTPRequestHandler):
             painter.colorize(id_str, blur=blur)
 
         t.append(time.time())
-        content = bytes(
-            "{ 'message':'The command Completed Successfully' , 'Status':'200 OK','success':true , 'used':" + str(args.gpu) + "}", "UTF-8")
-        self.send_response(200)
-        self.send_header("Content-type", "application/json")
-        self.send_header("Content-Length", len(content))
-        self.end_headers()
-        self.wfile.write(content)
+        self.ret_result(True)
         t.append(time.time())
         for i, j in zip(t, t[1:]):
             print("time [sec]", j - i)
 
         return
+
+    def ret_result(self, success):
+        if success:
+            content = bytes(
+                "{ 'message':'The command Completed Successfully' , 'Status':'200 OK','success':true , 'used':" + str(args.gpu) + "}", "UTF-8")
+            self.send_response(200)
+        else:
+            content = bytes(
+                "{ 'message':'The command Failed' , 'Status':'503 NG','success':false , 'used':" + str(args.gpu) + "}", "UTF-8")
+            self.send_response(503)
+        self.send_header("Content-type", "application/json")
+        self.send_header("Content-Length", len(content))
+        self.end_headers()
+        self.wfile.write(content)
+        t.append(time.time())
+ 
 
 parser = argparse.ArgumentParser(
     description='chainer line drawing colorization server')
