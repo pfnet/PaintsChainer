@@ -1,4 +1,4 @@
-var image_id, prev_image_id, startPaint, endPaint, colorize, select_src;
+var image_id, prev_image_id, colorize, select_src;
 
 $(function () {
   image_id = 'test_id';
@@ -67,18 +67,6 @@ $(function () {
     return idstr;
   }
 
-  startPaint = function () {
-    $('#painting_label').show();
-    $('#submit').prop('disabled', true);
-    console.log('coloring start');
-  };
-
-  endPaint = function () {
-    $('#painting_label').hide();
-    $('#submit').prop('disabled', false);
-    console.log('coloring finish');
-  };
-
   function paint(data) {
     $.ajax({
       type: 'POST',
@@ -88,14 +76,22 @@ $(function () {
       contentType: false,
       processData: false,
       dataType: 'text', // server response is broken
-      beforeSend: startPaint,
+      beforeSend: function () {
+        $('#painting_label').show();
+        $('#submit').prop('disabled', true);
+        console.log('coloring start');
+      },
       success: function () {
         console.log('uploaded');
         var now = new Date().getTime();
         $('#output').attr('src', '/images/out/' + image_id + '_0.jpg?' + now);
         $('#output_min').attr('src', '/images/out_min/' + image_id + '_0.png?' + now);
       },
-      complete: endPaint
+      complete: function () {
+        $('#painting_label').hide();
+        $('#submit').prop('disabled', false);
+        console.log('coloring finish');
+      }
     });
   }
 
