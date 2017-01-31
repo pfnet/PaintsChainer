@@ -24,7 +24,7 @@ class Painter:
     def __init__(self, gpu=0):
 
         print("start")
-        self.root = "./static/images/"
+        self.root = "./images/"
         self.batchsize = 1
         self.outdir = self.root + "out/"
         self.outdir_min = self.root + "out_min/"
