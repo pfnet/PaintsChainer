@@ -30,7 +30,9 @@ class ImageAndRefDataset(chainer.dataset.DatasetMixin):
     def get_example(self, i, minimize=False, blur=0, s_size=128):
         path1 = os.path.join(self._root1, self._paths[i])
         #image1 = ImageDataset._read_image_as_array(path1, self._dtype)
+
         image1 = cv2.imread(path1, cv2.IMREAD_GRAYSCALE)
+        print("load:" + path1, os.path.isfile(path1), iamge1 is None)
         image1 = np.asarray(image1, self._dtype)
 
         _image1 = image1.copy()
