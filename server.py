@@ -109,8 +109,7 @@ class MyHandler(http.server.CGIHTTPRequestHandler):
         self.send_header("Content-Length", len(content))
         self.end_headers()
         self.wfile.write(content)
-        t.append(time.time())
- 
+        # t.append(time.time())
 
 parser = argparse.ArgumentParser(
     description='chainer line drawing colorization server')
