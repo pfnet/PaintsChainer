@@ -88,10 +88,8 @@ $(function () {
     startPaint();
     toBlob($('#background')[0], function (line_blob) {
       var ajaxData = new FormData();
-      if (prev_image_id != image_id) {
-        ajaxData.append('line', line_blob);
-        prev_image_id = image_id;
-      }
+      ajaxData.append('line', line_blob);
+
       // cf. https://github.com/websanova/wPaint/blob/master/src/wPaint.js#L243
       var wPaint = $('#wPaint').data('wPaint');
       var canvasSave = document.createElement('canvas'),
