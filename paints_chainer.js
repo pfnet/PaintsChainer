@@ -29,7 +29,6 @@ $(function () {
     menuOffsetTop: -50
   });
 
-  $('#painting_label').hide();
   $('#submit').prop('disabled', true);
   $('#submit').click(function () {
     if (!$('#background').attr('src')) {
@@ -93,18 +92,21 @@ $(function () {
       processData: false,
       dataType: 'text', // server response is broken
       beforeSend: function () {
-        $('#painting_label').show();
+        $('#painting_status').attr('class', '').text('NOW COLORING ...').show();
         $('#submit').prop('disabled', true);
         console.log('coloring start');
       },
       success: function () {
         console.log('uploaded');
+        $('#painting_status').hide();
         var now = new Date().getTime();
         $('#output').attr('src', '/images/out/' + image_id + '_0.jpg?' + now);
         $('#output_min').attr('src', '/images/out_min/' + image_id + '_0.png?' + now);
       },
+      error: function () {
+        $('#painting_status').attr('class', 'text-error').text('SERVER ERROR').show();
+      },
       complete: function () {
-        $('#painting_label').hide();
         $('#submit').prop('disabled', false);
         console.log('coloring finish');
       }
