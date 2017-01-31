@@ -103,7 +103,7 @@ $(function () {
       ctxSave.drawImage(wPaint.canvas, 0, 0);
       canvasSave.toBlob(function (ref_blob) {
         if (ref_blob.size > 30000) {
-          alert("file size over");
+          alert('file size over');
           return;
         }
         ajaxData.append('ref', ref_blob);
@@ -145,7 +145,7 @@ $(function () {
   });
 
   select_src = function (src) {
-    console.log("select src");
+    console.log('select src');
     $('#img_pane').show('fast', function () {
       image_id = uniqueid();
       $('#background').attr('src', src);
