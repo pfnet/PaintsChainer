@@ -42,12 +42,11 @@
     <div class="navbar navbar-inverse navbar-static-top" style="margin-bottom: 20px">
       <div class="navbar-inner">
         <div class="container-fluid">
-          <a class="brand" href="#">PaintsChainer</a>
+          <a class="brand" href="javascript:void 0">PaintsChainer</a>
           <ul class="nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="http://paintschainer.preferred.tech/downloads/">Downloads</a></li>
-            <li><a href="http://chainer.org/">Chainer</a></li>
-            <li><a href="http://github.com/taizan/PaintsChainer">GitHub</a></li>
+            <li class="active"><a href="javascript:void 0">Home</a></li>
+            <li><a href="http://paintschainer.preferred.tech/downloads/" target="_blank">Downloads</a></li>
+            <li><a href="http://github.com/taizan/PaintsChainer" target="_blank">GitHub</a></li>
           </ul>
         </div>
       </div>
@@ -57,9 +56,15 @@
       <div class="row-fluid">
         <div class="span12">
           <div class="well text-center">
-            <i class="icon-picture"></i> Set sketch: <input id="load_line_file" type="file">
-            <button id="submit" class="btn btn-large btn-primary" disabled><i class="icon-edit icon-white"></i> Colorize</button>
-            <span id="painting_status" style="display:none"></span>
+            <p>
+              <i class="icon-picture"></i> Set sketch: <input id="load_line_file" type="file">
+              <button id="submit" class="btn btn-large btn-primary" disabled><i class="icon-edit icon-white"></i> Colorize</button>
+              <span id="painting_status" style="display:none"></span>
+            </p>
+            <p>
+              Powered by <a href="https://www.sakura.ad.jp/koukaryoku/" target="_blank"><img src="koukaryoku-64.png" width="32">高火力コンピューティング</a>,
+              <a href="http://chainer.org/" target="_blank"><img src="chainer-64.png" width="32">Chainer</a>.
+            </p>
           </div>
           <div style="display:none">
             <label>blur_k<input id="blur_k" type="number" name="blur"></label>
@@ -87,7 +92,7 @@
           </ol>
         </div>
         <div class="span6">
-          <a class="twitter-timeline"  href="https://twitter.com/hashtag/PaintsChainer" data-widget-id="826017928868818945">#PaintsChainer</a>
+          <a class="twitter-timeline" href="https://twitter.com/hashtag/PaintsChainer" data-widget-id="826017928868818945">#PaintsChainer</a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
         </div>
       </div>
