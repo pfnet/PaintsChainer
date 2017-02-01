@@ -57,7 +57,11 @@ class Painter:
         array = array.transpose(1, 2, 0)
         array = array.clip(0, 255).astype(np.uint8)
         array = cuda.to_cpu(array)
-        img = cv2.cvtColor(array, cv2.COLOR_YUV2RGB)
+        (major, minor, _) = cv2.__version__.split(".")
+        if major == '3':
+            img = cv2.cvtColor(array, cv2.COLOR_YUV2RGB)
+        else:
+            img = cv2.cvtColor(array, cv2.COLOR_YUV2BGR)
         cv2.imwrite(name, img)
 
     def liner(self, id_str):
