@@ -19,8 +19,26 @@ from urllib.parse import parse_qs
 sys.path.append('./cgi-bin/paint_x2_unet')
 import cgi_exe
 
+if os.name == 'nt':
+    WK_VER_ROOT = r'C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0'
+    WK_INCLUDE = WK_VER_ROOT + r'\ucrt'
+    WK_LIB_UM = WK_VER_ROOT + r'\um'
+    WK_LIB_UCRT64 = WK_VER_ROOT + r'\ucrt\x64'
+
+    if os.path.isdir(WK_INCLUDE):
+        os.environ['INCLUDE'] = WK_INCLUDE
+    else:
+        print('Include Path for Windows Kit not exists: ' + WK_INCLUDE)
+
+    if os.path.isdir(WK_LIB_UM) and os.path.isdir(WK_LIB_UCRT64):
+        os.environ['LIB'] = WK_LIB_UM + ';' + WK_LIB_UCRT64
+    else:
+        print('Lib Path for Windows Kit not exists: ' + WK_LIB_UM + ';' + WK_LIB_UCRT64)
+
 
 class MyHandler(http.server.CGIHTTPRequestHandler):
+
+    t = []
 
     def __init__(self, req, client_addr, server):
         http.server.CGIHTTPRequestHandler.__init__(
@@ -41,14 +59,14 @@ class MyHandler(http.server.CGIHTTPRequestHandler):
         return postvars
 
     def do_POST(self):
-        t = []
-        t.append(time.time())
+        
+        self.t.append(time.time())
         form = self.parse_POST()
-        t.append(time.time())
+        self.t.append(time.time())
 
         if "id" in form:
             id_str = form["id"][0]
-            id_str = re.sub(r'\W+', '', id_str.decode() )
+            id_str = re.sub(r'\W+', '', id_str.decode())
         else:
             self.ret_result(False)
             return
@@ -79,7 +97,7 @@ class MyHandler(http.server.CGIHTTPRequestHandler):
             except ValueError:
                 blur = 0
 
-        t.append(time.time())
+        self.t.append(time.time())
         if "step" in form:
             if form["step"][0].decode() == "S":
                 painter.colorize_s(id_str, blur=blur)
@@ -88,10 +106,10 @@ class MyHandler(http.server.CGIHTTPRequestHandler):
         else:
             painter.colorize(id_str, blur=blur)
 
-        t.append(time.time())
+        self.t.append(time.time())
         self.ret_result(True)
-        t.append(time.time())
-        for i, j in zip(t, t[1:]):
+        self.t.append(time.time())
+        for i, j in zip(self.t, self.t[1:]):
             print("time [sec]", j - i)
 
         return
@@ -110,6 +128,7 @@ class MyHandler(http.server.CGIHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Origin", "http://paintschainer.preferred.tech") # hard coding...
         self.end_headers()
         self.wfile.write(content)
+        self.t.append(time.time())
 
 
 parser = argparse.ArgumentParser(
