@@ -21,34 +21,43 @@ from urllib.parse import parse_qs
 sys.path.append('./cgi-bin/paint_x2_unet')
 import cgi_exe
 
+
 if os.name == 'nt':
+    import winreg
+    import glob
+    import platform
+
     try:
         ARCH_ARR = ["arm64", "arm", "x64", "x86"]
         ARCH_INDEX0 = 0 if ("arm" in platform.machine().lower()) else 2
         ARCH_INDEX1 = 0 if ("64" in platform.architecture()[0]) else 1
-        ARCH_PATH = ARCH_ARR [ARCH_INDEX0 + ARCH_INDEX1]
-        ARCH_INJECT = " (x86)" if ("64" in platform.architecture()[0]) else ""
-        WK_INC_ROOT = r'C:\Program Files' + ARCH_INJECT + r'\Windows Kits\10\Include'
-        WK_FOUND_INC = WK_INC_ROOT + "\\" + os.listdir(path = WK_INC_ROOT)[0]
-        WK_LIB_ROOT = r'C:\Program Files' + ARCH_INJECT + r'\Windows Kits\10\Lib'
-        WK_FOUND_LIB = WK_LIB_ROOT + "\\" + os.listdir(path = WK_LIB_ROOT)[0]
-        WK_INCLUDE = WK_FOUND_INC + r'\ucrt'
-        WK_LIB_UM = WK_FOUND_LIB + r'\um'+ "\\" + ARCH_PATH
-        WK_LIB_UCRT64 = WK_FOUND_LIB + r'\ucrt' + "\\" + ARCH_PATH
-        
+        ARCH_NAME = ARCH_ARR[ARCH_INDEX0 + ARCH_INDEX1]
+        _ = r'SOFTWARE\WOW6432Node\Microsoft\Microsoft SDKs\Windows\v10.0'
+        WK_WINREG_KEY = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, _, 0, winreg.KEY_READ)
+        WK_PATH, _ = winreg.QueryValueEx(WK_WINREG_KEY, 'InstallationFolder')
+        winreg.CloseKey(WK_WINREG_KEY)
+
+        WK_LIB_ROOT = max(glob.glob(WK_PATH + '\\Lib\\*'))
+        WK_INCLUDE_ROOT = max(glob.glob(WK_PATH + '\\Include\\*'))
+        WK_INCLUDE = WK_INCLUDE_ROOT + r'\ucrt'
+        WK_LIB_UM = WK_INCLUDE_ROOT + r'\um'
+        WK_LIB_UCRT64 = WK_LIB_ROOT + "\\ucrt\\" + ARCH_NAME
+
         if os.path.isdir(WK_INCLUDE):
             os.environ['INCLUDE'] = WK_INCLUDE
         else:
-             raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), WK_INCLUDE)
-        
+            print('Include Path for Windows Kit not exists: ' + WK_INCLUDE)
+
         if os.path.isdir(WK_LIB_UM) and os.path.isdir(WK_LIB_UCRT64):
             os.environ['LIB'] = WK_LIB_UM + ';' + WK_LIB_UCRT64
-        elif os.path.isdir(WK_LIB_UM):
-            raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), WK_LIB_UCRT64)
         else:
-            raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), WK_LIB_UM)
-        
-    except Exception as e: print (e)
+            if os.path.isdir(WK_LIB_UM):
+                print('Lib Path(Windows Kit UCRT64) not exists: ' + WK_LIB_UCRT64)
+            else:
+                print('Lib Path(Windows Kit UM) not exists: ' + WK_LIB_UM)
+
+    except WindowsError:
+        print('Cannot get Windows Kit Library path from WINREG')
 
 
 class MyHandler(http.server.CGIHTTPRequestHandler):
