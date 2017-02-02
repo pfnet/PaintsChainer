@@ -6,10 +6,10 @@ Using CNN, you can colorize your scketch automatically / semi-automatically .
 
 ## Requirement
 If not specified, versions are assumed to be recent LTS version.
-- A Nvidia graphic card supporting CUDA (6.5, 7.0, 7.5, 8.0)
+- A Nvidia graphic card supporting cuDNN i.e. compute capability >= 3.0 (See https://developer.nvidia.com/cuda-gpus)
 - Linux: gcc/ g++ 4.8
 - Windows: "Microsoft Visual C++ Build Tools 2015" (NOT "Microsoft Visual Studio Community 2015")
-- Python 3 (3.5 recommended) (Python 2.7 needs modifying web host (at least) )
+- Python 3 (3.5 recommended) ( Python 2.7 needs modifying web host (at least) )
 - Numpy 
 - openCV "cv2" (Python 3 support possible, see installation guide)
 - Chainer
