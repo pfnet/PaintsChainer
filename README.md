@@ -16,35 +16,9 @@ If not specified, versions are assumed to be recent LTS version.
 - CUDA / cuDNN (If you use GPU)
 
 ## Installation Guide
-#### Option: Docker user
-If you have docker, you may check https://hub.docker.com/r/liamjones/paintschainer-docker/ 
-(not supported officially but thanks for volunteering)
+check wiki page 
+https://github.com/pfnet/PaintsChainer/wiki/Installation-Guide
 
-#### Option: Fresh install
-If not specified, follow instruction from their official website.
-- Chainer/ Linux gcc: See http://docs.chainer.org/en/stable/install.html
-- Microsoft Visual C++ Build Tools 2015 (Windows): See http://landinghub.visualstudio.com/visual-cpp-build-tools
-- Python: See https://www.python.org/downloads/
-- Numpy: `pip install numpy`. Check installed version after that.
-- openCV (Windows): See https://www.solarianprogrammer.com/2016/09/17/install-opencv-3-with-python-3-on-windows/ (Pre-built libraries)
-- openCV (Linux): See http://stackoverflow.com/questions/20953273/install-opencv-for-python-3-3 (Build from source)
-- openCV (Anaconda): `conda install -c menpo opencv3` (Pre-built libraries)
-
-- Step by step guide for installing chainer (Windows):
-(Tested on Win10 64-bit, python 3.5)
- - Step1: Install "Microsoft Visual C++ Build Tools". Uninstall "Visual Studio 2015" if you have it.
- - Step2: Install "Nvidia CUDA"
- - Step3: Register and download "NVIDIA Deep Learning SDK"
- - Step4: `pip install chainer --no-cache-dir -vvvv` (<- Do this AT LAST!)
-
-If you failed to perform the following steps, you will see this message. Uninstall chainer and install it again.
-```
- Running command python setup.py egg_info
-    Options: {'profile': False, 'annotate': False, 'linetrace': False, 'no_cuda': False}
-    Include directories: ['C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v8.0\\include']
-    Library directories: ['C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v8.0\\bin', 'C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v8.0\\lib\\x64']
-    Microsoft Visual C++ 14.0 is required. Get it with "Microsoft Visual C++ Build Tools": http://landinghub.visualstudio.com/visual-cpp-build-tools
-```
 
 ## Starting web host
 UI is html based. using wPaint.js
