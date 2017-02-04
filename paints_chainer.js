@@ -1,4 +1,5 @@
-var image_id;
+var image_id
+var origin = '';
 
 // cf. https://github.com/websanova/wPaint/blob/master/src/wPaint.js#L243
 $.fn.wPaint.extend({
@@ -26,8 +27,8 @@ $(function () {
   $('#img_pane').show(); // for $.fn.wPaint
   $('#wPaint').wPaint({
     path: '/wPaint/',
-    menuOffsetLeft: -35,
-    menuOffsetTop: -50
+    menuOffsetLeft: 0,
+    menuOffsetTop: -45
   });
   $('#img_pane').hide();
 
@@ -74,10 +75,7 @@ $(function () {
   }
 
   function paint(data) {
-    var origin = '';
-    if (location.hostname === 'paintschainer.preferred.tech') {
-      origin = 'http://paintschainer' + (Math.floor(Math.random() * 5) + 1) + '.preferred.tech'; // 1 ~ 5
-    }
+    
     $.ajax({
       type: 'POST',
       url: origin + '/post',
@@ -113,26 +111,30 @@ $(function () {
     xhr.onload = function () {
       fn(xhr.response);
     };
-    xhr.responseType = 'blob';
     xhr.open('GET', url);
+    xhr.responseType = 'blob';
     xhr.send();
   }
 
   function colorize(new_image_id) {
     $('#wPaint').wPaint('imageCanvas').toBlob(function (ref_blob) {
-      if (ref_blob.size > 30000) {
-        alert('file size over');
-        return;
-      }
-      var ajaxData = new FormData();
+     var ajaxData = new FormData();
       ajaxData.append('id', new_image_id || image_id);
       ajaxData.append('blur', $('#blur_k').val());
       ajaxData.append('ref', ref_blob);
       if ( new_image_id ) {
         image_id = new_image_id;
+        origin = '';
+        if (location.hostname === 'paintschainer.preferred.tech') {
+            origin = 'http://paintschainer' + (Math.floor(Math.random() * 5) + 1) + '.preferred.tech'; // 1 ~ 5
+        }
       }
       blobUrlToBlob($('#background').attr('src'), function (line_blob) {
         ajaxData.append('line', line_blob);
+        if (line_blob.size > 1000000) {
+           alert('file size over');
+           return;
+        }
         paint(ajaxData);
       });
     });
