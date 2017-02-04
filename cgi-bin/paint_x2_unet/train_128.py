@@ -135,8 +135,8 @@ class ganUpdater(chainer.training.StandardUpdater):
     def loss_cnn(self, cnn, x_out, t_out, y_out, lam1=1, lam2=1, lam3=10):
         loss_rec = lam1 * (F.mean_absolute_error(x_out, t_out))
         loss_adv = lam2 * y_out
-        l_t, e_t = self.l.calc((t_out - 128) / 128)
-        l_x, e_x = self.l.calc((x_out - 128) / 128)
+        l_t = self.l.calc((t_out - 128) / 128)
+        l_x = self.l.calc((x_out - 128) / 128)
         loss_l = lam3 * (F.mean_absolute_error(l_x, l_t))
         loss = loss_rec + loss_adv + loss_l
         chainer.report({'loss': loss, "loss_rec": loss_rec,

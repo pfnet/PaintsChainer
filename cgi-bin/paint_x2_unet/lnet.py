@@ -129,10 +129,10 @@ class LNET(chainer.Chain):
         del d2
         d0 = self.dc0(F.concat([e0, d1]))
 
-        return d0, e
+        return d0
 
     def __call__(self, x, t, test=False):
-        h, x_e = self.calc(x, test)
+        h = self.calc(x, test)
         loss_c = mean_absolute_error(h, t)
         loss = loss_c
         chainer.report({'loss': loss, 'loss_c': loss_c}, self)
