@@ -27,8 +27,8 @@ $(function () {
   $('#img_pane').show(); // for $.fn.wPaint
   $('#wPaint').wPaint({
     path: '/wPaint/',
-    menuOffsetLeft: -35,
-    menuOffsetTop: -50
+    menuOffsetLeft: 0,
+    menuOffsetTop: -45
   });
   $('#img_pane').hide();
 
