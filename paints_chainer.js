@@ -111,8 +111,8 @@ $(function () {
     xhr.onload = function () {
       fn(xhr.response);
     };
-    xhr.responseType = 'blob';
     xhr.open('GET', url);
+    xhr.responseType = 'blob';
     xhr.send();
   }
 
