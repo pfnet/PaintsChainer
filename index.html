@@ -16,20 +16,35 @@
 
     <title>PaintsChainer</title>
 
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <link type="text/css" rel="stylesheet" href="wPaint/lib/wColorPicker.min.css">
-    <link type="text/css" rel="stylesheet" href="wPaint/wPaint.min.css">
+    
+    <!-- Canvas toBlob polyfill -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/3.6.0/js/canvas-to-blob.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    
+    <!-- wColorPicker -->
+    <link rel="stylesheet" href="wPaint/lib/wColorPicker.min.css">
+    <script src="wPaint/lib/paletteGenerator.js"></script>
+    <script src="wPaint/lib/wColorPicker.min.js?ver3"></script>
+    
+    <!-- wPaint -->
+    <link rel="stylesheet" href="wPaint/wPaint.min.css">
+    <script src="wPaint/wPaint.min.js"></script>
+    <script src="wPaint/plugins/main/src/wPaint.menu.main.js"></script>
+    
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <!-- main -->
+    <script src="paints_chainer.js?ver9"></script>
+    <!-- fileend -->
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/3.6.0/js/canvas-to-blob.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="wPaint/lib/paletteGenerator.js"></script>
-    <script type="text/javascript" src="wPaint/lib/wColorPicker.min.js?ver2"></script>
-    <script type="text/javascript" src="wPaint/wPaint.min.js"></script>
-    <script type="text/javascript" src="wPaint/plugins/main/src/wPaint.menu.main.js"></script>
-    <script type="text/javascript" src="paints_chainer.js?ver9"></script>
     <style>
       .wColorPicker-palettes-holder { white-space: nowrap; } /* wColorPicker workaround for Firefox */
     </style>
