@@ -43,15 +43,15 @@ class ImageAndRefDataset(chainer.dataset.DatasetMixin):
                 s1 = int(image1.shape[1] * (s_size / image1.shape[0]))
                 s1 = s1 - s1 % 16
                 _s0 = 4 * s0
-                _s1 = int(image1.shape[1] * (s0 / image1.shape[0]))
-                _s1 = (_s1+8) - (s1+8) % 16
+                _s1 = int(image1.shape[1] * ( _s0 / image1.shape[0]))
+                _s1 = (_s1+8) - (_s1+8) % 16
             else:
                 s1 = s_size
                 s0 = int(image1.shape[0] * (s_size / image1.shape[1]))
                 s0 = s0 - s0 % 16
                 _s1 = 4 * s1
-                _s0 = int(image1.shape[0] * ( s1 / image1.shape[1]))
-                _s0 = (_s0+8) - (s0+8) % 16
+                _s0 = int(image1.shape[0] * ( _s1 / image1.shape[1]))
+                _s0 = (_s0+8) - (_s0+8) % 16
 
             _image1 = image1.copy()
             _image1 = cv2.resize(_image1, (_s1, _s0),
