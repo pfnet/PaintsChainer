@@ -1,14 +1,10 @@
 #!/usr/bin/env python
 
 import http.server
-import socketserver
 
 import os
 import sys
-import errno
-import platform
 import time
-import json
 import re
 
 import argparse
@@ -33,7 +29,8 @@ if os.name == 'nt':
         ARCH_INDEX1 = 0 if ("64" in platform.architecture()[0]) else 1
         ARCH_NAME = ARCH_ARR[ARCH_INDEX0 + ARCH_INDEX1]
         _ = r'SOFTWARE\WOW6432Node\Microsoft\Microsoft SDKs\Windows\v10.0'
-        WK_WINREG_KEY = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, _, 0, winreg.KEY_READ)
+        WK_WINREG_KEY = winreg.OpenKey(
+            winreg.HKEY_LOCAL_MACHINE, _, 0, winreg.KEY_READ)
         WK_PATH, _ = winreg.QueryValueEx(WK_WINREG_KEY, 'InstallationFolder')
         winreg.CloseKey(WK_WINREG_KEY)
 
@@ -83,7 +80,7 @@ class MyHandler(http.server.CGIHTTPRequestHandler):
         return postvars
 
     def do_POST(self):
-        
+
         self.t.append(time.time())
         form = self.parse_POST()
         self.t.append(time.time())
@@ -149,7 +146,7 @@ class MyHandler(http.server.CGIHTTPRequestHandler):
             self.send_response(503)
         self.send_header("Content-type", "application/json")
         self.send_header("Content-Length", len(content))
-        self.send_header("Access-Control-Allow-Origin", "*") # hard coding...
+        self.send_header("Access-Control-Allow-Origin", "*")  # hard coding...
         self.end_headers()
         self.wfile.write(content)
         self.t.append(time.time())

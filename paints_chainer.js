@@ -75,7 +75,7 @@ $(function () {
   }
 
   function paint(data) {
-    
+
     $.ajax({
       type: 'POST',
       url: origin + '/post',
@@ -132,7 +132,7 @@ $(function () {
       blobUrlToBlob($('#background').attr('src'), function (line_blob) {
         ajaxData.append('line', line_blob);
         if (line_blob.size > 1000000) {
-           alert('file size over');
+           alert('Image too large to colorize');
            return;
         }
         paint(ajaxData);

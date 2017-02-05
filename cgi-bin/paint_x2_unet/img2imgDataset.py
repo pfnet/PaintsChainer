@@ -2,9 +2,11 @@
 
 import numpy as np
 import chainer
+'''
 import chainer.functions as F
 import chainer.links as L
 import chainer.datasets.image_dataset as ImageDataset
+'''
 import six
 import os
 
