@@ -2,7 +2,7 @@
 Paints Chainer is line drawing colorizer using chainer.
 Using CNN, you can colorize your scketch automatically / semi-automatically .
 
-![image](https://github.com/taizan/PaintsChainer/blob/open/sample.png)
+![image](https://github.com/pfnet/PaintsChainer/blob/open/sample.png)
 
 ## Requirement
 If not specified, versions are assumed to be recent LTS version.
@@ -10,13 +10,13 @@ If not specified, versions are assumed to be recent LTS version.
 - Linux: gcc/ g++ 4.8
 - Windows: "Microsoft Visual C++ Build Tools 2015" (NOT "Microsoft Visual Studio Community 2015")
 - Python 3 (3.5 recommended) ( Python 2.7 needs modifying web host (at least) )
-- Numpy 
+- Numpy
 - openCV "cv2" (Python 3 support possible, see installation guide)
 - Chainer
 - CUDA / cuDNN (If you use GPU)
 
 ## Installation Guide
-check wiki page 
+check wiki page
 https://github.com/pfnet/PaintsChainer/wiki/Installation-Guide
 
 
@@ -43,7 +43,7 @@ http://paintschainer.preferred.tech/
 ## License
 Source code : MIT License
 
-Pre-trained Model : All Rights Reserved 
+Pre-trained Model : All Rights Reserved
 
 ## Pre-Trained Models
 Download following model files to  cgi-bin/paint_x2_unet/models/

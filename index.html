@@ -4,37 +4,32 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="./favicon_paintschainer.ico" sizes="32x32">
-    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#c90000">
+    <meta name="apple-mobile-web-app-title" content="PaintsChainer">
+    <meta name="application-name" content="PaintsChainer">
+    <meta name="theme-color" content="#ffffff">
+
     <title>PaintsChainer</title>
-    
-    <!-- Canvas toBlob polyfill -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/3.6.0/js/canvas-to-blob.min.js"></script>
-    
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    
-    <!-- jQuery UI -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    
-    <!-- wColorPicker -->
-    <link rel="stylesheet" href="wPaint/lib/wColorPicker.min.css">
-    <script src="wPaint/lib/paletteGenerator.js"></script>
-    <script src="wPaint/lib/wColorPicker.min.js?ver2"></script>
-    
-    <!-- wPaint -->
-    <link rel="stylesheet" href="wPaint/wPaint.min.css">
-    <script src="wPaint/wPaint.min.js"></script>
-    <script src="wPaint/plugins/main/src/wPaint.menu.main.js"></script>
-    
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
-    <!-- main -->
-    <script src="paints_chainer.js?ver9"></script>
-    <!-- fileend -->
+
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="wPaint/lib/wColorPicker.min.css">
+    <link type="text/css" rel="stylesheet" href="wPaint/wPaint.min.css">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/3.6.0/js/canvas-to-blob.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="wPaint/lib/paletteGenerator.js"></script>
+    <script type="text/javascript" src="wPaint/lib/wColorPicker.min.js?ver2"></script>
+    <script type="text/javascript" src="wPaint/wPaint.min.js"></script>
+    <script type="text/javascript" src="wPaint/plugins/main/src/wPaint.menu.main.js"></script>
+    <script type="text/javascript" src="paints_chainer.js?ver9"></script>
     <style>
       .wColorPicker-palettes-holder { white-space: nowrap; } /* wColorPicker workaround for Firefox */
     </style>
@@ -42,35 +37,35 @@
   <body>
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
-        
+
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><img src="paintschainer-64.png" width="24" style='display:inline' /> PaintsChainer</a>
+          <span class="navbar-brand"><img src="paintschainer-64.png" width="24" style="display:inline" /> PaintsChainer</span>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="javascript:void 0">Home</a></li>
+            <li class="active"><a>Home</a></li>
             <li><a href="http://paintschainer.preferred.tech/downloads/" target="_blank">Downloads</a></li>
-            <li><a href="http://github.com/taizan/PaintsChainer" target="_blank">GitHub</a></li>
+            <li><a href="http://github.com/pfnet/PaintsChainer" target="_blank">GitHub</a></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-          
+
             <li><a href="https://www.sakura.ad.jp/koukaryoku/" target="_blank">Powered by: <img src="koukaryoku-64.png" height="32" style="margin:-1em 0">高火力コンピューティング</a></li>
             <li><a href="http://chainer.org/" target="_blank"><img src="chainer-64.png" height="32" style="margin:-1em 0">Chainer</a></li>
           </ul>
 
         </div>
-        
+
       </div>
 
 
-      
+
     </nav>
-    <div class='container'>
+    <div class="container">
       <div class="well">
         <input id="blur_k" type="hidden"  />
         <div class="row">
@@ -83,50 +78,50 @@
           </div>
         </div>
       </div>
-      
+
       <div class="row" style="margin-top:42px;">
-        <div class='col-xs-11 col-sm-6'>
+        <div class="col-xs-11 col-sm-6">
           <div id="img_pane" style="display:none">
             <div id="wPaint" style="position:relative; background-color:rgba(0,0,255,0); border:solid 1px">
-              <img id="background" style="max-width:100%">
+              <img id="background" style="max-width:100%" src="">
             </div>
           </div>
         </div>
         <div class="col-xs-1 visible-xs-block"></div><!-- for dragging on narrow screen(smartphones)-->
-        <div class='col-xs-11 col-sm-6'>
+        <div class="col-xs-11 col-sm-6">
           <img id="output" style="display:none; max-width:100%; border:solid 1px black">
         </div>
         <div class="col-xs-1 visible-xs-block"></div>
       </div>
-      
+
       <div class="row">
         <div class="col-md-6">
           <ol>
-            <li>Select line drawing image<br>(gif &amp; png with a ch is not supported)</li>
+            <li>Select line drawing image<br>(gif &amp; png with an alpha channel is not supported)</li>
             <li>Add hint information using color pen in left image</li>
             <li>Click the 'colorize' button</li>
           </ol>
-          <p>   Provided by <a href="https://www.preferred-networks.jp/" target="_blank" style="font-size:150%"><img src="PFN_logo.png" width="24"> Preferred Networks</a> .</p>
+          <p>   Provided by <a href="https://www.preferred-networks.jp/" target="_blank" style="font-size:150%"><img src="PFN_logo.png" width="24"> Preferred Networks</a></p>
         </div>
-        
+
         <div class="col-md-6">
           <a class="twitter-timeline" href="https://twitter.com/hashtag/PaintsChainer" data-widget-id="826017928868818945">#PaintsChainer</a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
         </div>
       </div>
-      
-      
-      
-      
+
+
+
+
     </div>
-  </div>
+
     <script>
     if (location.hostname === 'paintschainer.preferred.tech') {
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-      
+
       ga('create', 'UA-91036510-1', 'auto');
       ga('send', 'pageview');
     }
