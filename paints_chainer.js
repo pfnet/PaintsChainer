@@ -27,8 +27,8 @@ $(function () {
   $('#img_pane').show(); // for $.fn.wPaint
   $('#wPaint').wPaint({
     path: '/wPaint/',
-    menuOffsetLeft: -35,
-    menuOffsetTop: -50
+    menuOffsetLeft: 0,
+    menuOffsetTop: -45
   });
   $('#img_pane').hide();
 
@@ -144,8 +144,8 @@ $(function () {
     xhr.onload = function () {
       fn(xhr.response);
     };
-    xhr.responseType = 'blob';
     xhr.open('GET', url);
+    xhr.responseType = 'blob';
     xhr.send();
   }
 
@@ -165,7 +165,7 @@ $(function () {
       blobUrlToBlob($('#background').attr('src'), function (line_blob) {
         ajaxData.append('line', line_blob);
         if (line_blob.size > 1000000) {
-           alert('file size over');
+           alert('Image too large to colorize');
            return;
         }
         post(ajaxData);

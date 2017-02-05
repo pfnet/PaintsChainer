@@ -3,15 +3,15 @@
 
 import numpy as np
 import chainer
-import chainer.functions as F
-import chainer.links as L
-import six
-import os
 import cv2
 
-from chainer import cuda, optimizers, serializers, Variable
-from chainer import training
-from chainer.training import extensions
+#import chainer.functions as F
+#import chainer.links as L
+#import six
+#import os
+
+from chainer import cuda, serializers, Variable  # , optimizers, training
+#from chainer.training import extensions
 #from train import Image2ImageDataset
 from img2imgDataset import ImageAndRefDataset
 
@@ -29,6 +29,7 @@ class Painter:
         self.outdir = self.root + "out/"
         self.outdir_min = self.root + "out_min/"
         self.gpu = gpu
+        self._dtype = np.float32
 
         print("load model")
         if self.gpu >= 0:
@@ -40,7 +41,7 @@ class Painter:
         if self.gpu >= 0:
             self.cnn_128.to_gpu()
             self.cnn.to_gpu()
-        lnn = lnet.LNET()
+        #lnn = lnet.LNET()
         #serializers.load_npz("./cgi-bin/wnet/models/model_cnn_128_df_4", cnn_128)
         #serializers.load_npz("./cgi-bin/paint_x2_unet/models/model_cnn_128_f3_2", cnn_128)
         serializers.load_npz(
@@ -77,6 +78,7 @@ class Painter:
         if self.gpu >= 0:
             x = cuda.to_gpu(x)
 
+        lnn = lnet.LNET()
         y = lnn.calc(Variable(x, volatile='on'), test=True)
 
         self.save_as_img(y.data[0], self.root + "line/" + id_str + ".jpg")
@@ -156,5 +158,6 @@ class Painter:
 
 if __name__ == '__main__':
     for n in range(1):
+        p = Painter()
         print(n)
-        colorize(n * batchsize)
+        p.colorize(n * p.batchsize)
