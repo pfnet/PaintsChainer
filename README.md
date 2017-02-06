@@ -55,7 +55,8 @@ http://paintschainer.preferred.tech/downloads/
 
 ## Developper Community
 Feel free to require invitation!
-paintschainerdev.slack.com
+
+https://paintschainerdev.slack.com/
 
 ## Acknowledgements
 This project is powered by Preferred Networks.
