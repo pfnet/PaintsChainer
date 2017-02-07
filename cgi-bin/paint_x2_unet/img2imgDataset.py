@@ -98,10 +98,7 @@ class ImageAndRefDataset(chainer.dataset.DatasetMixin):
             image_ref = cv2.resize(image_ref, (image1.shape[1], image1.shape[
                                    0]), interpolation=cv2.INTER_AREA)
 
-            for x in range(image1.shape[0]):
-                for y in range(image1.shape[1]):
-                    for ch in range(3):
-                        image1[x][y][ch + 1] = image_ref[x][y][ch]
+            image1[:, :, 1:] = image_ref
 
         return image1.transpose(2, 0, 1),  _image1.transpose(2, 0, 1)
 
