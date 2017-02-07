@@ -4,6 +4,10 @@ Using CNN, you can colorize your scketch automatically / semi-automatically .
 
 ![image](https://github.com/pfnet/PaintsChainer/blob/open/sample.png)
 
+## DEMO
+http://paintschainer.preferred.tech/
+
+
 ## Requirement
 If not specified, versions are assumed to be recent LTS version.
 - A Nvidia graphic card supporting cuDNN i.e. compute capability >= 3.0 (See https://developer.nvidia.com/cuda-gpus)
@@ -37,9 +41,6 @@ main code of colorization is in `cgi-bin/paint_x2_unet`
 to train 1st layer using GPU 0 `python train_128.py -g 0`
 to train 2nd layer using GPU 0 `python train_x2.py -g 0`
 
-## DEMO
-http://paintschainer.preferred.tech/
-
 ## License
 Source code : MIT License
 
@@ -52,7 +53,10 @@ http://paintschainer.preferred.tech/downloads/
 
 (Copyright 2017 Taizan Yonetsuji All Rights Reserved.)
 
+## Developper Community
+Feel free to require invitation!
 
+https://paintschainerdev.slack.com/
 
 ## Acknowledgements
 This project is powered by Preferred Networks.
