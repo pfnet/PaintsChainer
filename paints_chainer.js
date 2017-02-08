@@ -74,12 +74,45 @@ $(function () {
     return idstr;
   }
 
-  function paint(data) {
-
+  function post(data) {
+ 
     $.ajax({
       type: 'POST',
       url: origin + '/post',
       data: data,
+      cache: false,
+      contentType: false,
+      processData: false,
+      dataType: 'text', // server response is broken
+      beforeSend: function () {
+        $('#painting_status').attr('class', '').text('NOW UPLOADING ...').show();
+        $('#submit').prop('disabled', true);
+        console.log('coloring start');
+      },
+      success: function () {
+        console.log('uploaded');
+        paint(data.id)
+      },
+      error: function () {
+        $('#painting_status').attr('class', 'text-error').text('UPLOAD ERROR').show();
+        $('#submit').prop('disabled', false);
+      },
+      complete: function () {
+        console.log('post finish');
+      }
+    });
+  }
+
+
+
+  function paint(id) {
+    var ajaxData = new FormData();
+      ajaxData.append('id', image_id)   
+    
+    $.ajax({
+      type: 'POST',
+      url: origin + '/paint',
+      data: ajaxData,
       cache: false,
       contentType: false,
       processData: false,
@@ -135,7 +168,7 @@ $(function () {
            alert('Image too large to colorize');
            return;
         }
-        paint(ajaxData);
+        post(ajaxData);
       });
     });
   };
