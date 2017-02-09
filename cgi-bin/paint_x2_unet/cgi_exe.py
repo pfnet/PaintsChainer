@@ -132,6 +132,7 @@ class Painter:
             'L': self.outdir + id_str + ".jpg", 
             'C': self.outdir + id_str + "_0." + colorize_format}
         self.save_as_img(image_conv2d_layer.data[0], image_out_path[step])
+        del image_conv2d_layer
 
 
 
