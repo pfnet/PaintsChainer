@@ -13,6 +13,13 @@ import os
 from chainer import cuda, optimizers, serializers, Variable
 import cv2
 
+def cvt2YUV(img):
+    (major, minor, _) = cv2.__version__.split(".")
+    if major == '3':
+        img = cv2.cvtColor( img, cv2.COLOR_RGB2YUV )
+    else:
+        img = cv2.cvtColor( img, cv2.COLOR_BGR2YUV )
+    return img
 
 class ImageAndRefDataset(chainer.dataset.DatasetMixin):
 
@@ -82,7 +89,7 @@ class ImageAndRefDataset(chainer.dataset.DatasetMixin):
             image_ref = cv2.resize(image_ref, (image1.shape[1], image1.shape[
                                    0]), interpolation=cv2.INTER_NEAREST)
             b, g, r, a = cv2.split(image_ref)
-            image_ref = cv2.cvtColor(cv2.merge((b, g, r)), cv2.COLOR_RGB2YUV)
+            image_ref = cvt2YUV( cv2.merge((b, g, r)) )
 
             for x in range(image1.shape[0]):
                 for y in range(image1.shape[1]):
@@ -92,7 +99,7 @@ class ImageAndRefDataset(chainer.dataset.DatasetMixin):
 
         else:
             image_ref = cv2.imread(path_ref, cv2.IMREAD_COLOR)
-            image_ref = cv2.cvtColor(image_ref, cv2.COLOR_RGB2YUV)
+            image_ref = cvt2YUV(image_ref)
             image1 = cv2.resize(
                 image1, (4 * image_ref.shape[1], 4 * image_ref.shape[0]), interpolation=cv2.INTER_AREA)
             image_ref = cv2.resize(image_ref, (image1.shape[1], image1.shape[
@@ -157,7 +164,7 @@ class Image2ImageDataset(chainer.dataset.DatasetMixin):
             image1 = cv2.imread(path1, cv2.IMREAD_GRAYSCALE)
             image2 = cv2.imread(path2, cv2.IMREAD_COLOR)
 
-        image2 = cv2.cvtColor(image2, cv2.COLOR_RGB2YUV)
+        image2 = cv2.cvt2YUV( image2 )
         name1 = os.path.basename(self._paths[i])
 
         if self._train and np.random.rand() < 0.2:
@@ -245,7 +252,7 @@ class Image2ImageDatasetX2(Image2ImageDataset):
         #image1 = ImageDataset._read_image_as_array(path1, self._dtype)
         image1 = cv2.imread(path1, cv2.IMREAD_GRAYSCALE)
         image2 = cv2.imread(path2, cv2.IMREAD_COLOR)
-        image2 = cv2.cvtColor(image2, cv2.COLOR_RGB2YUV)
+        image2 = cvt2YUV(image2)
         image2 = np.asarray(image2, self._dtype)
         name1 = os.path.basename(self._paths[i])
         vec = self.get_vec(name1)
