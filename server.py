@@ -114,13 +114,7 @@ class MyHandler(http.server.CGIHTTPRequestHandler):
                 blur = 0
 
         self.log_t()
-        if "step" in form:
-            if form["step"][0].decode() == "S":
-                painter.colorize_s(id_str, blur=blur)
-            if form["step"][0].decode() == "L":
-                painter.colorize_l(id_str)
-        else:
-            painter.colorize(id_str, blur=blur)
+        painter.colorize(id_str, form["step"][0].decode() if "step" in form else "C", blur=blur)
 
         self.log_t()
         self.ret_result(True)

@@ -100,7 +100,7 @@ class ImageAndRefDataset(chainer.dataset.DatasetMixin):
 
             image1[:, :, 1:] = image_ref
 
-        return image1.transpose(2, 0, 1),  _image1.transpose(2, 0, 1)
+        return image1.transpose(2, 0, 1), _image1.transpose(2, 0, 1)
 
 
 class Image2ImageDataset(chainer.dataset.DatasetMixin):
