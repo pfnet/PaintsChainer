@@ -159,7 +159,7 @@ $(function () {
         image_id = new_image_id;
         origin = '';
         if (location.hostname === 'paintschainer.preferred.tech') {
-            origin = 'http://paintschainer' + (Math.floor(Math.random() * 5) + 1) + '.preferred.tech'; // 1 ~ 5
+            origin = 'http://paint20' + (Math.floor(Math.random() * 3) + 2) + '.preferred.tech'; // 2 ~ 4
         }
       }
       blobUrlToBlob($('#background').attr('src'), function (line_blob) {
