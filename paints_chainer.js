@@ -96,6 +96,8 @@ $(function () {
       error: function () {
         $('#painting_status').attr('class', 'text-error').text('UPLOAD ERROR').show();
         $('#submit').prop('disabled', false);
+        err_origin = origin
+        wihle( err_origin == origin ){  resetOrigin() }
       },
       complete: function () {
         console.log('post finish');
@@ -131,6 +133,8 @@ $(function () {
       },
       error: function () {
         $('#painting_status').attr('class', 'text-error').text('SERVER ERROR').show();
+        err_origin = origin
+        wihle( err_origin == origin ){  resetOrigin() }
       },
       complete: function () {
         $('#submit').prop('disabled', false);
@@ -149,6 +153,12 @@ $(function () {
     xhr.send();
   }
 
+  function resetOrigin() {
+    if (location.hostname === 'paintschainer.preferred.tech') {
+      origin = 'http://paint20' + (Math.floor(Math.random() * 4) + 1) + '.preferred.tech'; // 1 ~ 4
+    }
+  }
+
   function colorize(new_image_id) {
     $('#wPaint').wPaint('imageCanvas').toBlob(function (ref_blob) {
      var ajaxData = new FormData();
@@ -158,9 +168,7 @@ $(function () {
       if ( new_image_id ) {
         image_id = new_image_id;
         origin = '';
-        if (location.hostname === 'paintschainer.preferred.tech') {
-            origin = 'http://paint20' + (Math.floor(Math.random() * 4) + 1) + '.preferred.tech'; // 1 ~ 4
-        }
+        resetOrigin()
       }
       blobUrlToBlob($('#background').attr('src'), function (line_blob) {
         ajaxData.append('line', line_blob);
