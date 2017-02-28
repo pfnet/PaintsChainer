@@ -155,7 +155,11 @@ $(function () {
 
   function resetOrigin() {
     if (location.hostname === 'paintschainer.preferred.tech') {
-      origin = 'http://paint20' + (Math.floor(Math.random() * 4) + 1) + '.preferred.tech'; // 1 ~ 4
+      if (location.protocol === 'https:') {
+        origin = '//paintschainer-api.preferred.tech';
+      } else {
+        origin = 'http://paint20' + (Math.floor(Math.random() * 4) + 1) + '.preferred.tech'; // 1 ~ 4
+      }
     }
   }
 
