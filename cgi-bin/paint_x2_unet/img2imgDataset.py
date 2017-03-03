@@ -164,7 +164,7 @@ class Image2ImageDataset(chainer.dataset.DatasetMixin):
             image1 = cv2.imread(path1, cv2.IMREAD_GRAYSCALE)
             image2 = cv2.imread(path2, cv2.IMREAD_COLOR)
 
-        image2 = cv2.cvt2YUV( image2 )
+        image2 = cvt2YUV( image2 )
         name1 = os.path.basename(self._paths[i])
 
         if self._train and np.random.rand() < 0.2:
