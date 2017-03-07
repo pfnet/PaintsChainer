@@ -1,6 +1,6 @@
 # Paints Chainer
-Paints Chainer is line drawing colorizer using chainer.
-Using CNN, you can colorize your scketch automatically / semi-automatically .
+Paints Chainer is a line drawing colorizer using chainer.
+Using CNN, you can colorize your sketch semi-automatically .
 
 ![image](https://github.com/pfnet/PaintsChainer/blob/open/sample.png)
 
@@ -53,8 +53,8 @@ http://paintschainer.preferred.tech/downloads/
 
 (Copyright 2017 Taizan Yonetsuji All Rights Reserved.)
 
-## Developper Community
-Feel free to require invitation!
+## Developer Community
+Feel free to request an invitation!
 
 https://paintschainerdev.slack.com/
 
