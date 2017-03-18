@@ -1,3 +1,5 @@
 .idea
 .pyc
 __pycache__
+build/*
+debug.log
