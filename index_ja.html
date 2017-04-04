@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/images/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="https://paintschainer-cdn.preferred.tech/images/paintschainer-64x64.png" sizes="64x64">
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#c90000">
     <meta name="apple-mobile-web-app-title" content="PaintsChainer">
@@ -73,7 +72,7 @@
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
           </button>
-          <span class="navbar-brand"><img src="/images/paintschainer-64.png" width="24" style="display:inline" /> PaintsChainer</span>
+          <span class="navbar-brand"><img src="https://paintschainer-cdn.preferred.tech/images/paintschainer-64x64.png" width="24" style="display:inline" /> PaintsChainer</span>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -89,8 +88,8 @@
       </div>
     </nav>
     <div class="container">
-      線画自動着色サービスへようこそ！
-      <div class="well">
+      <span class="label label label-info">線画自動着色サービスへようこそ！</span>
+      <div class="well" style="background-color: aliceblue">
         <input id="blur_k" type="hidden"  />
         <div class="row">
           <div class="col-md-6" style="margin-bottom: 10px;">
@@ -118,17 +117,29 @@
       </div>
       <div class="row">
         <div class="col-md-6">
-          使い方
+          <span class="label label-success">使い方</span>
+          <div class="well well-small" >
           <ol>
-            <li>線画を選択して下さい<br>(gifと透過情報を含むpngファイルはサポートされていません)</li>
-            <li>選択すると自動で着色が始まります。色を変えたい時はパレットから色を選択して線画上にヒントを書き込みましょう</li>
-            <li>塗りなおす時は「着色」ボタンを押して下さい</li>
+            <li>線画を選択して下さい</li>
+            <li>選択すると自動で着色開始</li>
+            <li>パレットから色を選択して線画上にヒントを入力できます</li>
+            <li>塗りなおす時は「着色」ボタン</li>
           </ol>
-          <p>  提供元：<a href="https://www.preferred-networks.jp/" target="_blank" style="font-size:150%"><img src="/images/PFN_logo.png" width="24"> Preferred Networks</a></p>
+
+          <span style="color:gray">※gifと透過情報を含むpngファイルはサポートされていません</span>
+          </div>
+          <div class="well well-small" style="background-color:#f7fafa" >
+            <p>  提供：<a href="https://www.preferred-networks.jp/" target="_blank" style="color:#0060de;font-size:120%"><img src="/images/PFN_logo.png" width="24"> Preferred Networks</a></p>
+            <p> <span class="label label-warning">お知らせ</span> <a style="color:black" href="https://preferred-networks.connpass.com/event/53135/"><u>4/19  「オープンハウス2017春」開催</u></a></p>
+
+          </div>
         </div>
         <div class="col-md-6">
-          <a class="twitter-timeline" href="https://twitter.com/hashtag/PaintsChainer" data-widget-id="826017928868818945">#PaintsChainer</a>
-          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        <span class="label label label-info">twitter timeline</span>
+        <div style="border:solid silver 1px;border-radius: 4px;">
+            <a class="twitter-timeline" href="https://twitter.com/hashtag/PaintsChainer" data-widget-id="826017928868818945">#PaintsChainer</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
         </div>
       </div>
     </div>

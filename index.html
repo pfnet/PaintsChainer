@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/images/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="https://paintschainer-cdn.preferred.tech/images/paintschainer-64x64.png" sizes="64x64">
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#c90000">
     <meta name="apple-mobile-web-app-title" content="PaintsChainer">
@@ -73,7 +72,7 @@
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
           </button>
-          <span class="navbar-brand"><img src="/images/paintschainer-64.png" width="24" style="display:inline" /> PaintsChainer</span>
+          <span class="navbar-brand"><img src="https://paintschainer-cdn.preferred.tech/images/paintschainer-64x64.png" width="24" style="display:inline" /> PaintsChainer</span>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -89,7 +88,8 @@
       </div>
     </nav>
     <div class="container">
-      <div class="well">
+      <span class="label label label-info">Auto Sketch Colorization</span>
+      <div class="well" style="background-color: aliceblue">
         <input id="blur_k" type="hidden"  />
         <div class="row">
           <div class="col-md-6" style="margin-bottom: 10px;">
@@ -117,16 +117,26 @@
       </div>
       <div class="row">
         <div class="col-md-6">
-          <ol>
-            <li>Select line drawing image<br>(gif &amp; png with an alpha channel is not supported)</li>
-            <li>Add hint information using color pen in left image</li>
-            <li>Click the 'colorize' button</li>
-          </ol>
-          <p>   Provided by <a href="https://www.preferred-networks.jp/" target="_blank" style="font-size:150%"><img src="/images/PFN_logo.png" width="24"> Preferred Networks</a></p>
+
+          <span class="label label-success">How To Use</span>
+            <div class="well well-small" >
+              <ol>
+                <li>Select line drawing image
+                <li>Add hint information using color pen in left image</li>
+                <li>Click the 'colorize' button</li>
+              </ol>
+              <span style="color:gray">(gif &amp; alpha channel png is not supported)</li></span>
+            </div>
+          <div class="well well-small" style="background-color:#f7fafa" >
+            <p>   Provided by <a href="https://www.preferred-networks.jp/"  target="_blank" style="color:#0060de; font-size:120%"><img src="/images/PFN_logo.png" width="24"> Preferred Networks</a></p>
+          </div>
         </div>
         <div class="col-md-6">
-          <a class="twitter-timeline" href="https://twitter.com/hashtag/PaintsChainer" data-widget-id="826017928868818945">#PaintsChainer</a>
-          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          <span class="label label label-info">twitter timeline</span>
+          <div style="border:solid silver 1px;border-radius: 4px;">
+            <a class="twitter-timeline" href="https://twitter.com/hashtag/PaintsChainer" data-widget-id="826017928868818945">#PaintsChainer</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </div>
         </div>
       </div>
     </div>
@@ -191,7 +201,7 @@
       }
       // ブラウザの言語が日本語の場合、日本語サイトへ、それ以外の場合英語サイトへリダイレクト
       if (browserLanguage().indexOf("ja") != -1) {
-        location.replace("index_ja.html");
+        //location.replace("index_ja.html");
       }
     </script>
   </body>
