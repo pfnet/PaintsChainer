@@ -199,9 +199,12 @@
           return undefined;
         }
       }
-      // ブラウザの言語が日本語の場合、日本語サイトへ、それ以外の場合英語サイトへリダイレクト
+      // ブラウザの言語が日本語/中国語の場合、それぞれのサイトへ、リダイレクト
       if (browserLanguage().indexOf("ja") != -1) {
         location.replace("index_ja.html");
+      }
+      else if (browserLanguage().indexOf("zh") != -1) {
+        location.replace("index_zh.html");
       }
     </script>
   </body>
