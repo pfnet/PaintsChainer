@@ -1,0 +1,75 @@
+.btn {
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: #87CEFA;
+    border-radius: 50%;
+    color: #111;
+    padding: px 0px 15px 0px;
+    margin: 10px;
+}
+
+div.step {
+    margin: 10px;
+    background:#fff; 
+    padding: 10px 0px 15px 15px; 
+    border:1px solid #DDDDDD; 
+    border-radius:10px;
+}
+
+div.inline {
+    display: table-cell;
+}
+
+div.stepcontainer {
+    overflow: hidden;
+    
+}
+
+h1 {
+    border-left: solid;
+    border-left-color: #87CEFA;
+    border-left-width: 8px;
+    padding-left: 35px;
+    margin-left: 27px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    color: #87CEFA;
+}
+
+p.instruction {
+    font-size: 16px;
+    font-weight: 400;
+    
+}
+
+img {
+    animation: colorize 2s cubic-bezier(0, 0, .78, .36) 1;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    display: block;
+    margin: none;
+    max-width: 95%;
+}
+
+.return {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+@keyframes colorize {
+    0% {
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+    }
+    100% {
+        -webkit-filter: grayscale(0%);
+        filter: grayscale(0%);
+    }
+}
