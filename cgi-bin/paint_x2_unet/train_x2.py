@@ -151,7 +151,7 @@ class ganUpdater(chainer.training.StandardUpdater):
         x_in = Variable(x_in)
         t_out = Variable(t_out)
 
-        x_out = self.cnn_128.calc(x_in, test=False)
+        x_out = self.cnn_128.calc(x_in)
         x_out = x_out.data.get()
 
         for j in range(batchsize):
@@ -162,7 +162,7 @@ class ganUpdater(chainer.training.StandardUpdater):
                         x_out[j, ch, :], (w_in_2, w_in_2), interpolation=cv2.INTER_CUBIC))
 
         x_in_2 = Variable(x_in_2)
-        x_out_2 = self.cnn.calc(x_in_2, test=False)
+        x_out_2 = self.cnn.calc(x_in_2)
 
         cnn_optimizer = self.get_optimizer('cnn')
 

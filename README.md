@@ -16,7 +16,7 @@ If not specified, versions are assumed to be recent LTS version.
 - Python 3 (3.5 recommended) ( Python 2.7 needs modifying web host (at least) )
 - Numpy
 - openCV "cv2" (Python 3 support possible, see installation guide)
-- Chainer
+- Chainer 2.0.0 or later
 - CUDA / cuDNN (If you use GPU)
 
 ## Installation Guide

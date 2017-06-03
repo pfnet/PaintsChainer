@@ -96,43 +96,43 @@ class LNET(chainer.Chain):
             # l = L.Linear(3*3*256, 2)'
         )
 
-    def enc(self, x, test=False):
-        e0 = F.relu(self.bnc0(self.c0(x), test=test))
-        e1 = F.relu(self.bnc1(self.c1(e0), test=test))
-        e2 = F.relu(self.bnc2(self.c2(e1), test=test))
-        e3 = F.relu(self.bnc3(self.c3(e2), test=test))
-        e4 = F.relu(self.bnc4(self.c4(e3), test=test))
-        e5 = F.relu(self.bnc5(self.c5(e4), test=test))
-        e6 = F.relu(self.bnc6(self.c6(e5), test=test))
-        e7 = F.relu(self.bnc7(self.c7(e6), test=test))
-        e8 = F.relu(self.bnc8(self.c8(e7), test=test))
+    def enc(self, x):
+        e0 = F.relu(self.bnc0(self.c0(x)))
+        e1 = F.relu(self.bnc1(self.c1(e0)))
+        e2 = F.relu(self.bnc2(self.c2(e1)))
+        e3 = F.relu(self.bnc3(self.c3(e2)))
+        e4 = F.relu(self.bnc4(self.c4(e3)))
+        e5 = F.relu(self.bnc5(self.c5(e4)))
+        e6 = F.relu(self.bnc6(self.c6(e5)))
+        e7 = F.relu(self.bnc7(self.c7(e6)))
+        e8 = F.relu(self.bnc8(self.c8(e7)))
         return [e0, e2, e4, e6, e7, e8]
 
-    def calc(self, x, test=False):
+    def calc(self, x):
         e0, e2, e4, e6, e7, e8 = self.enc(x)
 
-        d8 = F.relu(self.bnd8(self.dc8(F.concat([e7, e8])), test=test))
+        d8 = F.relu(self.bnd8(self.dc8(F.concat([e7, e8]))))
         del e7, e8
-        d7 = F.relu(self.bnd7(self.dc7(d8), test=test))
+        d7 = F.relu(self.bnd7(self.dc7(d8)))
         del d8
-        d6 = F.relu(self.bnd6(self.dc6(F.concat([e6, d7])), test=test))
+        d6 = F.relu(self.bnd6(self.dc6(F.concat([e6, d7]))))
         del d7, e6
-        d5 = F.relu(self.bnd5(self.dc5(d6), test=test))
+        d5 = F.relu(self.bnd5(self.dc5(d6)))
         del d6
-        d4 = F.relu(self.bnd4(self.dc4(F.concat([e4, d5])), test=test))
+        d4 = F.relu(self.bnd4(self.dc4(F.concat([e4, d5]))))
         del d5, e4
-        d3 = F.relu(self.bnd3(self.dc3(d4), test=test))
+        d3 = F.relu(self.bnd3(self.dc3(d4)))
         del d4
-        d2 = F.relu(self.bnd2(self.dc2(F.concat([e2, d3])), test=test))
+        d2 = F.relu(self.bnd2(self.dc2(F.concat([e2, d3]))))
         del d3, e2
-        d1 = F.relu(self.bnd1(self.dc1(d2), test=test))
+        d1 = F.relu(self.bnd1(self.dc1(d2)))
         del d2
         d0 = self.dc0(F.concat([e0, d1]))
 
         return d0
 
-    def __call__(self, x, t, test=False):
-        h = self.calc(x, test)
+    def __call__(self, x, t):
+        h = self.calc(x)
         loss_c = mean_absolute_error(h, t)
         loss = loss_c
         chainer.report({'loss': loss, 'loss_c': loss_c}, self)

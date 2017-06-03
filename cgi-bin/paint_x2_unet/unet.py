@@ -57,42 +57,42 @@ class UNET(chainer.Chain):
             # l = L.Linear(3*3*256, 2)'
         )
 
-    def calc(self, x, test=False, use_cudnn=False):
-        e0 = F.relu(self.bnc0(self.c0(x), test=test), use_cudnn)
-        e1 = F.relu(self.bnc1(self.c1(e0), test=test), use_cudnn)
-        e2 = F.relu(self.bnc2(self.c2(e1), test=test), use_cudnn)
+    def calc(self, x):
+        e0 = F.relu(self.bnc0(self.c0(x)))
+        e1 = F.relu(self.bnc1(self.c1(e0)))
+        e2 = F.relu(self.bnc2(self.c2(e1)))
         del e1
-        e3 = F.relu(self.bnc3(self.c3(e2), test=test), use_cudnn)
-        e4 = F.relu(self.bnc4(self.c4(e3), test=test), use_cudnn)
+        e3 = F.relu(self.bnc3(self.c3(e2)))
+        e4 = F.relu(self.bnc4(self.c4(e3)))
         del e3
-        e5 = F.relu(self.bnc5(self.c5(e4), test=test), use_cudnn)
-        e6 = F.relu(self.bnc6(self.c6(e5), test=test), use_cudnn)
+        e5 = F.relu(self.bnc5(self.c5(e4)))
+        e6 = F.relu(self.bnc6(self.c6(e5)))
         del e5
-        e7 = F.relu(self.bnc7(self.c7(e6), test=test), use_cudnn)
-        e8 = F.relu(self.bnc8(self.c8(e7), test=test), use_cudnn)
+        e7 = F.relu(self.bnc7(self.c7(e6)))
+        e8 = F.relu(self.bnc8(self.c8(e7)))
 
-        d8 = F.relu(self.bnd8(self.dc8(F.concat([e7, e8])), test=test), use_cudnn)
+        d8 = F.relu(self.bnd8(self.dc8(F.concat([e7, e8]))))
         del e7, e8
-        d7 = F.relu(self.bnd7(self.dc7(d8), test=test), use_cudnn)
+        d7 = F.relu(self.bnd7(self.dc7(d8)))
         del d8
-        d6 = F.relu(self.bnd6(self.dc6(F.concat([e6, d7])), test=test), use_cudnn)
+        d6 = F.relu(self.bnd6(self.dc6(F.concat([e6, d7]))))
         del d7, e6
-        d5 = F.relu(self.bnd5(self.dc5(d6), test=test), use_cudnn)
+        d5 = F.relu(self.bnd5(self.dc5(d6)))
         del d6
-        d4 = F.relu(self.bnd4(self.dc4(F.concat([e4, d5])), test=test), use_cudnn)
+        d4 = F.relu(self.bnd4(self.dc4(F.concat([e4, d5]))))
         del d5, e4
-        d3 = F.relu(self.bnd3(self.dc3(d4), test=test), use_cudnn)
+        d3 = F.relu(self.bnd3(self.dc3(d4)))
         del d4
-        d2 = F.relu(self.bnd2(self.dc2(F.concat([e2, d3])), test=test), use_cudnn)
+        d2 = F.relu(self.bnd2(self.dc2(F.concat([e2, d3]))))
         del d3, e2
-        d1 = F.relu(self.bnd1(self.dc1(d2), test=test), use_cudnn)
+        d1 = F.relu(self.bnd1(self.dc1(d2)))
         del d2
         d0 = self.dc0(F.concat([e0, d1]))
 
         return d0
 
-    def __call__(self, x, t, test=False):
-        h = self.calc(x, test)
+    def __call__(self, x, t):
+        h = self.calc(x)
         loss = F.mean_absolute_error(h, t)
         chainer.report({'loss': loss}, self)
         return loss
@@ -120,18 +120,18 @@ class DIS(chainer.Chain):
             bnc7=L.BatchNormalization(256),
         )
 
-    def calc(self, x, test=False):
-        h = F.relu(self.bnc1(self.c1(x), test=test))
-        h = F.relu(self.bnc2(self.c2(h), test=test))
-        h = F.relu(self.bnc3(self.c3(h), test=test))
-        h = F.relu(self.bnc4(self.c4(h), test=test))
-        h = F.relu(self.bnc5(self.c5(h), test=test))
-        h = F.relu(self.bnc6(self.c6(h), test=test))
-        h = F.relu(self.bnc7(self.c7(h), test=test))
+    def calc(self, x):
+        h = F.relu(self.bnc1(self.c1(x)))
+        h = F.relu(self.bnc2(self.c2(h)))
+        h = F.relu(self.bnc3(self.c3(h)))
+        h = F.relu(self.bnc4(self.c4(h)))
+        h = F.relu(self.bnc5(self.c5(h)))
+        h = F.relu(self.bnc6(self.c6(h)))
+        h = F.relu(self.bnc7(self.c7(h)))
         return self.l8l(h)
 
-    def __call__(self, x, t, test=False):
-        h = self.calc(x, test)
+    def __call__(self, x, t):
+        h = self.calc(x)
         loss = F.softmax_cross_entropy(h, t)
         #chainer.report({'loss': loss }, self)
         return loss

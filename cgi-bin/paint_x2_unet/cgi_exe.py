@@ -79,7 +79,9 @@ class Painter:
             x = cuda.to_gpu(x)
 
         lnn = lnet.LNET()
-        y = lnn.calc(Variable(x, volatile='on'), test=True)
+        with chainer.no_backprop_mode():
+            with chainer.using_config('train', False):
+                y = lnn.calc(Variable(x))
 
         self.save_as_img(y.data[0], self.root + "line/" + id_str + ".jpg")
 
@@ -103,7 +105,9 @@ class Painter:
             sample_container = cuda.to_gpu(sample_container)
 
         cnn = {'S': self.cnn_128, 'L': self.cnn_512, 'C': self.cnn_128}
-        image_conv2d_layer = cnn[step].calc(Variable(sample_container, volatile='on'), test=True)
+        with chainer.no_backprop_mode():
+            with chainer.using_config('train', False):
+                image_conv2d_layer = cnn[step].calc(Variable(sample_container))
         del sample_container
 
         if step == 'C':
@@ -124,7 +128,9 @@ class Painter:
                 link = cuda.to_gpu(input_bat, None)
             else:
                 link = input_bat
-            image_conv2d_layer = self.cnn_512.calc(Variable(link, volatile='on'), test=True)
+            with chainer.no_backprop_mode():
+                with chainer.using_config('train', False):
+                    image_conv2d_layer = self.cnn_512.calc(Variable(link))
             del link  # release memory
 
         image_out_path = {
