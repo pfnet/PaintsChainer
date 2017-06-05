@@ -109,7 +109,9 @@ class DIS(chainer.Chain):
             c5=L.Convolution2D(64, 128, 4, 2, 1),
             c6=L.Convolution2D(128, 128, 3, 1, 1),
             c7=L.Convolution2D(128, 256, 4, 2, 1),
-            l8l=L.Linear(None, 2, wscale=0.02 * math.sqrt(8 * 8 * 256)),
+            l8l=L.Linear(None, 2,
+                         initialW=chainer.initializers.HeNormal(
+                             math.sqrt(0.02 * math.sqrt(8 * 8 * 256) / 2))),
 
             bnc1=L.BatchNormalization(32),
             bnc2=L.BatchNormalization(32),
