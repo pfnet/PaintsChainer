@@ -3,14 +3,14 @@
 
 import numpy as np
 import chainer
+from chainer import cuda, serializers, Variable  # , optimizers, training
 import cv2
-
+import os.path
 #import chainer.functions as F
 #import chainer.links as L
 #import six
 #import os
 
-from chainer import cuda, serializers, Variable  # , optimizers, training
 #from chainer.training import extensions
 #from train import Image2ImageDataset
 from img2imgDataset import ImageAndRefDataset
@@ -31,6 +31,11 @@ class Painter:
         self.gpu = gpu
         self._dtype = np.float32
 
+        if not os.path.isfile("./models/unet_128_standard"):
+            print("./models/unet_128_standard not found. Please download them from http://paintschainer.preferred.tech/downloads/")
+        if not os.path.isfile("./models/unet_512_standard"):
+            print("./models/unet_512_standard not found. Please download them from http://paintschainer.preferred.tech/downloads/")
+
         print("load model")
         if self.gpu >= 0:
             cuda.get_device(self.gpu).use()
@@ -45,11 +50,11 @@ class Painter:
         #serializers.load_npz("./cgi-bin/wnet/models/model_cnn_128_df_4", cnn_128)
         #serializers.load_npz("./cgi-bin/paint_x2_unet/models/model_cnn_128_f3_2", cnn_128)
         serializers.load_npz(
-            "./cgi-bin/paint_x2_unet/models/unet_128_standard", self.cnn_128)
+            "./models/unet_128_standard", self.cnn_128)
         #serializers.load_npz("./cgi-bin/paint_x2_unet/models/model_cnn_128_ua_1", self.cnn_128)
         #serializers.load_npz("./cgi-bin/paint_x2_unet/models/model_m_1.6", self.cnn)
         serializers.load_npz(
-            "./cgi-bin/paint_x2_unet/models/unet_512_standard", self.cnn_512)
+            "./models/unet_512_standard", self.cnn_512)
         #serializers.load_npz("./cgi-bin/paint_x2_unet/models/model_p2_1", self.cnn)
         #serializers.load_npz("./cgi-bin/paint_x2_unet/models/model_10000", self.cnn)
         #serializers.load_npz("./cgi-bin/paint_x2_unet/models/liner_f", lnn)

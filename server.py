@@ -2,7 +2,6 @@
 
 import http.server
 
-import os
 import sys
 import time
 import re
@@ -142,29 +141,29 @@ class MyHandler(http.server.CGIHTTPRequestHandler):
         self.log_t()
 
 # set args 
+if "__main__" in __name__:
+    parser = argparse.ArgumentParser(
+        description='chainer line drawing colorization server')
+    parser.add_argument('--gpu', '-g', type=int, default=0,
+                        help='GPU ID (negative value indicates CPU)')
+    parser.add_argument('--mode', '-m', default="stand_alone",
+                        help='set process mode')
+    # other mode "post_server" "paint_server"
 
-parser = argparse.ArgumentParser(
-    description='chainer line drawing colorization server')
-parser.add_argument('--gpu', '-g', type=int, default=0,
-                    help='GPU ID (negative value indicates CPU)')
-parser.add_argument('--mode', '-m', default="stand_alone",
-                    help='set process mode')
-# other mode "post_server" "paint_server"
+    parser.add_argument('--port', '-p', type=int, default=8000,
+                        help='using port')
+    parser.add_argument('--debug', dest='debug', action='store_true')
+    parser.set_defaults(feature=False)
 
-parser.add_argument('--port', '-p', type=int, default=8000,
-                    help='using port')
-parser.add_argument('--debug', dest='debug', action='store_true')
-parser.set_defaults(feature=False)
+    parser.add_argument('--host', '-ho', default='localhost',
+                        help='using host')
 
-parser.add_argument('--host', '-ho', default='localhost',
-                    help='using host')
+    args = parser.parse_args()
 
-args = parser.parse_args()
+    if args.mode == "stand_alone" or args.mode == "paint_server":
+        print('GPU: {}'.format(args.gpu))
+        painter = cgi_exe.Painter(gpu=args.gpu)
 
-if( args.mode == "stand_alone" or args.mode == "paint_server" ):
-    print('GPU: {}'.format(args.gpu))
-    painter = cgi_exe.Painter(gpu=args.gpu)
-
-httpd = http.server.HTTPServer((args.host, args.port), MyHandler)
-print('serving at', args.host, ':', args.port, )
-httpd.serve_forever()
+    httpd = http.server.HTTPServer((args.host, args.port), MyHandler)
+    print('serving at', args.host, ':', args.port, )
+    httpd.serve_forever()
