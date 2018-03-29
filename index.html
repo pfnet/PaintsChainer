@@ -219,17 +219,20 @@
       // ブラウザ言語の取得
       function browserLanguage() {
         try {
-          return (navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0,2)
+          return navigator.browserLanguage || navigator.language || navigator.userLanguage;
         } catch(e) {
           return undefined;
         }
       }
       // ブラウザの言語が日本語/中国語の場合、それぞれのサイトへ、リダイレクト
-      if (browserLanguage().indexOf("ja") != -1) {
+      if (browserLanguage() === ("ja" || "ja-JP")) {
         location.replace("index_ja.html");
       }
-      else if (browserLanguage().indexOf("zh") != -1) {
+      else if (browserLanguage() === ("zh" || "zh-CN")) {
         location.replace("index_zh.html");
+      }
+      else if (browserLanguage() === "zh-TW") {
+        location.replace("index_zh-TW.html");
       }
     </script>
   </body>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="https://paintschainer-cdn.preferred.tech/images/paintschainer-64x64.png" sizes="64x64">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#c90000">
+    <meta name="apple-mobile-web-app-title" content="PaintsChainer">
+    <meta name="application-name" content="PaintsChainer">
+    <meta name="theme-color" content="#ffffff">
+    <title>PaintsChainer -線稿自動上色服務-</title>
+    <!-- Canvas toBlob polyfill -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/3.6.0/js/canvas-to-blob.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!-- jQuery Cookie -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <!-- wColorPicker -->
+    <link rel="stylesheet" href="wPaint/lib/wColorPicker.min.css">
+    <script src="wPaint/lib/paletteGenerator.js"></script>
+    <script src="wPaint/lib/wColorPicker.min.js?ver3"></script>
+    <!-- wPaint -->
+    <link rel="stylesheet" href="wPaint/wPaint.min.css">
+    <script src="wPaint/wPaint.min.js"></script>
+    <script src="wPaint/plugins/main/src/wPaint.menu.main.js"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <!-- main -->
+    <script src="paints_chainer.js?ver0.6"></script>
+    <!-- fileend -->
+    <style>
+      .wColorPicker-palettes-holder { white-space: nowrap; } /* wColorPicker workaround for Firefox */
+    </style>
+    <style>
+      body {
+        margin-bottom: 36px;
+      }
+      .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        /* Set the fixed height of the footer here */
+        height: 36px;
+        background-color: #f5f5f5;
+        font-size: 85%;
+      }
+      .container .text-muted {
+        margin: 8px 0;
+      }
+      .footer > .container {
+        padding-right: 15px;
+        padding-left: 15px;
+      }
+      .footer a {
+        color: #727272;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          </button>
+          <span class="navbar-brand"><img src="https://paintschainer-cdn.preferred.tech/images/paintschainer-64x64.png" width="24" style="display:inline" /> PaintsChainer</span>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a>Home</a></li>
+            <li><a href="howto_zh-TW.html" >How to</a></li>
+            <li><a href="//paintschainer.preferred.tech/downloads/" target="_blank">Downloads</a></li>
+            <li><a href="//github.com/pfnet/PaintsChainer" target="_blank">GitHub</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="https://twitter.com/paintschainer" target="_blank" style="padding: 6px 4px;">
+                <span class="fa-stack fa-lg" style="color:#55acee;">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-twitter fa-stack-1x"></i>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="https://facebook.com/PaintsChainer" target="_blank" style="padding: 6px 4px;">
+                <span class="fa-stack fa-lg" style="color:#3b5998;">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-facebook fa-stack-1x"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <span class="label label label-info">歡迎來到自動上色服務！</span>
+      <div class="well" style="background-color: aliceblue">
+        <input id="blur_k" type="hidden"  />
+        <div class="row">
+          <div class="col-md-6" style="margin-bottom: 10px;">
+            <i class="glyphicon glyphicon-picture"></i> 選擇線稿: <input id="load_line_file" type="file" style="display: inline;">
+          </div>
+          <div class="col-md-6">
+            <button id="submit" class="btn btn-large btn-primary" disabled><i class="icon-edit icon-white"></i> 上色</button>
+            <span id="painting_status" style="display:none"></span>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top:42px;">
+        <div class="col-xs-11 col-sm-6">
+          <div id="img_pane" style="display:none">
+            <div id="wPaint" style="position:relative; background-color:rgba(0,0,255,0); border:solid 1px">
+              <img id="background" style="max-width:100%" src="">
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-1 visible-xs-block"></div><!-- for dragging on narrow screen(smartphones)-->
+        <div class="col-xs-11 col-sm-6">
+          <img id="output" style="display:none; max-width:100%; border:solid 1px black">
+        </div>
+        <div class="col-xs-1 visible-xs-block"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <span class="label label-success">使用方法</span>
+          <div class="well well-small" >
+          <ol>
+            <li>請選擇線稿</li>
+            <li>選擇線稿後會立即自動上色</li>
+            <li>可以從調色板上選擇顏色給線稿添加上色的提示顏色</li>
+            <li>重新上色時請按“上色”鍵</li>
+          </ol>
+
+          <span style="color:gray">※不支持gif以及含有透明部分的png文件</span>
+          </div>
+          <div class="well well-small" style="background-color:#f7fafa" >
+            <p>  提供：<a href="https://www.preferred-networks.jp/" target="_blank" style="color:#0060de;font-size:120%"><img src="//paintschainer-cdn.preferred.tech/images/PFN_logo.png" width="24"> Preferred Networks</a></p>
+          </div>
+          <div class="well well-small" style="background-color:#f7fafa" >
+            <p>  協助：
+              <a href="https://www.sakura.ad.jp/koukaryoku/" target="_blank" style="text-decoration:none;"><img src="//paintschainer-cdn.preferred.tech/images/koukaryoku-64.png" height="32" style="margin:-1em 0">高火力コンピューティング</a>
+              &nbsp;
+              &nbsp;
+              <a href="http://chainer.org/" target="_blank" style="text-decoration:none;"><img src="//paintschainer-cdn.preferred.tech/images/chainer-64.png" height="32" style="margin:-1em 0">&nbsp;Chainer</a>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <span class="label label label-info">twitter timeline</span>
+          <div style="border:solid silver 1px;border-radius: 4px;">
+            <a class="twitter-timeline" href="https://twitter.com/hashtag/PaintsChainer" data-widget-id="826017928868818945">#PaintsChainer</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <div class="col-md-offset-9 col-md-1 col-xs-4"><p class="text-muted"><a href="//paintschainer-cdn.preferred.tech/terms_ja.html" target="_blank">使用規則</a></p></div>
+        <div class="col-md-2 col-xs-6"><p class="text-muted"><a href="//paintschainer-cdn.preferred.tech/privacy_ja.html" target="_blank"隱私權政策</a></p></div>
+      </div>
+    </footer>
+    <div class="modal fade" id="info-dialog" tabindex="-1" role="dialog" aria-labelledby="infoDialogLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="infoDialogLabel"><img src="//paintschainer-cdn.preferred.tech/images/paintschainer-64x64.png" width="24" style="display:inline" />&nbsp;Information</h4>
+          </div>
+          <div class="modal-body">
+            <p><b>歡迎來到PaintsChainer！</b></p>
+            <p>利用PaintsChainer時，請您務必認可以下利用規則以及隱私權政策。</p>
+            <p>使用前必讀。</p>
+            <ul>
+              <li><a href="//paintschainer-cdn.preferred.tech/terms_ja.html" target="_blank">利用规则</a></li>
+              <li><a href="//paintschainer-cdn.preferred.tech/privacy_ja.html" target="_blank">隐私权政策</a></li>
+            </ul>
+            <p>2017年3月8日</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="info-button">同意</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function() {
+        if (location.hostname === 'paintschainer.preferred.tech') {
+          if ($.cookie('info1') == null) {
+            $('#info-dialog').modal('show');
+          }
+          $('#info-button').click(function(e) {
+            $.cookie('info1', true, {expires: 365});
+          });
+        }
+       })();
+    </script>
+    <script>
+      if (location.hostname === 'paintschainer.preferred.tech') {
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-91036510-1', 'auto');
+        ga('send', 'pageview');
+      }
+    </script>
+  </body>
+</html>

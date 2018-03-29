@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="https://paintschainer-cdn.preferred.tech/images/paintschainer-64x64.png" sizes="64x64">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#c90000">
+    <meta name="apple-mobile-web-app-title" content="PaintsChainer">
+    <meta name="application-name" content="PaintsChainer">
+    <meta name="theme-color" content="#ffffff">
+    <title>PaintsChainer -線稿自動上色服務-</title>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!-- jQuery Cookie -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="main.css">
+    <style>
+      body {
+        margin-bottom: 36px;
+      }
+      .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        /* Set the fixed height of the footer here */
+        height: 36px;
+        background-color: #f5f5f5;
+        font-size: 85%;
+      }
+      .container .text-muted {
+        margin: 8px 0;
+      }
+      .footer > .container {
+        padding-right: 15px;
+        padding-left: 15px;
+      }
+      .footer a {
+        color: #727272;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          </button>
+          <span class="navbar-brand"><img src="https://paintschainer-cdn.preferred.tech/images/paintschainer-64x64.png" width="24" style="display:inline" /> PaintsChainer</span>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="//paintschainer.preferred.tech/index_zh-TW.html" >Home</a></li>
+            <li class="active"><a>How to</a></li>
+            <li><a href="//paintschainer.preferred.tech/downloads/" target="_blank">Downloads</a></li>
+            <li><a href="//github.com/pfnet/PaintsChainer" target="_blank">GitHub</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="https://twitter.com/paintschainer" target="_blank" style="padding: 6px 4px;">
+                <span class="fa-stack fa-lg" style="color:#55acee;">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-twitter fa-stack-1x"></i>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="https://facebook.com/PaintsChainer" target="_blank" style="padding: 6px 4px;">
+                <span class="fa-stack fa-lg" style="color:#3b5998;">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-facebook fa-stack-1x"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <div class="container">
+        <h1>使用方法</h1>
+        <div class="box">
+            <div class="stepcontainer">
+                <div class="inline"><div class="btn"><font color=#FFF>1</font></div></div>
+                <div class="inline"><div class="step">
+                    <p class="instruction">選擇一張線稿</p>     
+                    <a href="images/1.jpg">
+                        <img alt="Select line drawing image" src="images/1.jpg" />
+                    </a>
+                </div></div> 
+            </div>                          
+
+            <div class="stepcontainer">
+                <div class="inline"><div class="btn"><font color=#FFF>2</font></div></div>
+                <div class="inline"><div class="step">
+                    <p class="instruction">選擇線稿後會立即自動上色</p>     
+                    <a href="images/2.jpg">
+                        <img alt="Colorization will start automaticly after select an image" src="images/2.jpg" />
+                    </a>
+                </div></div>
+            </div>
+
+            <div class="stepcontainer">
+                <div class="inline"><div class="btn"><font color=#FFF>3</font></div></div>
+                <div class="inline"><div class="step">
+                    <p class="instruction">從調色板上選擇顏色給線稿添加上色的提示顏色</p>     
+                    <a href="images/3.jpg">
+                        <img alt="Add hint information using color pen in left image" src="images/3.jpg" />
+                    </a>
+                </div></div>
+            </div>
+
+            <div class="stepcontainer">
+                <div class="inline"><div class="btn"><font color=#FFF>4</font></div></div>
+                <div class="inline"><div class="step">
+                    <p class="instruction">按「上色」鍵以重新上色</p>     
+                    <a href="images/4.jpg">
+                        <img alt="Click the 'colorize' button" src="images/4.jpg" />
+                    </a>
+                </div></div>
+            </div>            
+        </div> 
+    </div> 
+      
+    <footer class="footer">
+      <div class="container">
+        <div class="col-md-offset-9 col-md-1 col-xs-4"><p class="text-muted"><a href="//paintschainer-cdn.preferred.tech/terms_ja.html" target="_blank">利用規則</a></p></div>
+        <div class="col-md-2 col-xs-6"><p class="text-muted"><a href="//paintschainer-cdn.preferred.tech/privacy_ja.html" target="_blank">隱私權政策</a></p></div>
+      </div>
+    </footer>
+    
+    </body>
+</html>
